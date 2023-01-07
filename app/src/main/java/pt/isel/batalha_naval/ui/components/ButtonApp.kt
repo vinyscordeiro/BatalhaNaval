@@ -1,14 +1,8 @@
 package pt.isel.batalha_naval.ui.components
 
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
@@ -16,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.models.ButtonType
 import pt.isel.batalha_naval.ui.theme.ErrorRed
 import pt.isel.batalha_naval.ui.theme.MainBlue
+import pt.isel.batalha_naval.ui.theme.White
 
 @Composable
 fun ButtonApp (
@@ -38,17 +32,19 @@ fun ButtonApp (
             .width(264.dp)
             .height(56.dp)
             .shadow(12.dp, shape = RoundedCornerShape(5.dp))
-        , colors = if(type == ButtonType.ERROR) ButtonDefaults.buttonColors(backgroundColor = ErrorRed) else ButtonDefaults.buttonColors(backgroundColor = MainBlue),
+            .padding(0.dp),
+        colors = if(type == ButtonType.ERROR) ButtonDefaults.buttonColors(backgroundColor = ErrorRed) else ButtonDefaults.buttonColors(backgroundColor = MainBlue),
         onClick = { /*TODO*/ }
     ) {
                 if (icon != null) {
-                    Icon( imageVector = icon, modifier = Modifier.size(24.dp) , contentDescription ="icon" )
+                    Icon( imageVector = icon ,modifier = Modifier.size(24.dp) , contentDescription ="icon" )
                 }
                 Text(
                 modifier = Modifier
                     .padding(start = 6.dp)
                     .align(Alignment.CenterVertically),
                     fontSize=20.sp,
+                    color= White,
                 text = text)
         }
 }
