@@ -14,6 +14,7 @@ import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.models.GameCellType
 import pt.isel.batalha_naval.ui.components.GameCell
 import pt.isel.batalha_naval.ui.components.GameSelection
+import pt.isel.batalha_naval.ui.components.PlayerTurn
 
 @Composable
 @Preview
@@ -21,12 +22,13 @@ fun GameScreen() {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Row(
-            modifier = Modifier.align(CenterHorizontally)
+            modifier = Modifier
+                .align(CenterHorizontally)
+                .padding(0.dp, 20.dp, 0.dp, 0.dp),
         ) {
             Image(painter = painterResource(R.drawable.logo), modifier = Modifier
-                .width(188.dp)
-                .height(170.dp)
-                .padding(0.dp, 50.dp, 0.dp, 0.dp), contentDescription = "Batalha Naval Logo")
+                .width(150.dp)
+                .height(120.dp), contentDescription = "Batalha Naval Logo")
 
             Text(text = "Vinicius Cordeiro",
                 modifier = Modifier
@@ -35,8 +37,13 @@ fun GameScreen() {
             )
         }
 
+        Row(modifier = Modifier.align(CenterHorizontally)) {
+            PlayerTurn(name = "Vinicius")
+        }
+
         Column(modifier = Modifier
-            .align(CenterHorizontally)) {
+            .align(CenterHorizontally)
+            .padding(0.dp,16.dp, 0.dp, 0.dp)) {
             Row(modifier = Modifier.align(CenterHorizontally)) {
                 GameSelection(title = " ")
                 GameSelection(title = "A")
