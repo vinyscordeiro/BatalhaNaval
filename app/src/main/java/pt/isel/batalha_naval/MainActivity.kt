@@ -10,11 +10,25 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.FirebaseApp
+import kotlinx.coroutines.*
+import pt.isel.batalha_naval.domain.PlayerInfo
+import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.ui.theme.BatalhaNavalTheme
 
 class MainActivity : ComponentActivity() {
+
+    val app by lazy {
+        (application as DependencyContainer)
+    }
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
+
         setContent {
             BatalhaNavalTheme {
                 // A surface container using the 'background' color from the theme
@@ -23,6 +37,18 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Greeting("Android")
+
+
+                    runBlocking {
+                            app.lobby.enter( PlayerInfo(
+                                info = UserInfo(
+                                    nick = "teste",
+                                    moto = "teste"
+                                )
+
+                            ))
+                    }
+
                 }
             }
         }

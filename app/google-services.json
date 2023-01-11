@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "911397581270",
+    "project_id": "pdm---battleship",
+    "storage_bucket": "pdm---battleship.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911397581270:android:a02d63cd76c93c1296f477",
+        "android_client_info": {
+          "package_name": "pt.isel.batalha_naval"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911397581270-666coaigahhnej0n2fdmjjrq2mb4l1tn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFZQtcibj3pziOjhczg57z0jYDnUmxJiY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911397581270-666coaigahhnej0n2fdmjjrq2mb4l1tn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -48,6 +48,7 @@ fun GameCell(
                     modifier = Modifier
                         .align(Alignment.Center),
                     fontSize = 20.sp)
+            else -> {}
         }
 
     }
