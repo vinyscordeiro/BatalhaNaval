@@ -112,6 +112,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
         return Challenge(challenger = localPlayer, challenged = to)
     }
 
+
     override suspend fun leave() {
         when (val currentState = state) {
             is InUseWithFlow -> currentState.scope.close()
