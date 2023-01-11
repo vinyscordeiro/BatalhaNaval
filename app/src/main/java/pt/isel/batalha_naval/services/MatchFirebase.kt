@@ -15,7 +15,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
     private var onGoingGame: Pair<Game, String>? = null
 
     private fun subscribeGameStateUpdated(
-        localPlayerMarker: Marker,
+        player: Player,
         gameId: String,
         flow: ProducerScope<GameEvent>
     ) =
@@ -27,7 +27,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
                     snapshot != null -> {
                         snapshot.toMatchStateOrNull()?.let {
                             val game = Game(
-                                localPlayerMarker = localPlayerMarker,
+                                playerTurn = player,
                                 forfeitedBy = it.second,
                                 board = it.first
                             )
@@ -46,14 +46,14 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
     private suspend fun publishGame(game: Game, gameId: String) {
         db.collection(ONGOING)
             .document(gameId)
-            .set(game.board.toDocumentContent())
+            .set(game.toDocumentContent())
             .await()
     }
 
     private suspend fun updateGame(game: Game, gameId: String) {
         db.collection(ONGOING)
             .document(gameId)
-            .update(game.board.toDocumentContent())
+            .update(game.toDocumentContent())
             .await()
     }
 
@@ -62,7 +62,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
 
         return callbackFlow {
             val newGame = Game(
-                localPlayerMarker = getLocalPlayerMarker(localPlayer, challenge),
+                playerTurn = getLocalPlayerMarker(localPlayer, challenge),
                 board = Board()
             )
             val gameId = challenge.challenger.id.toString()
@@ -73,7 +73,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
                     publishGame(newGame, gameId)
 
                 gameSubscription = subscribeGameStateUpdated(
-                    localPlayerMarker = newGame.localPlayerMarker,
+                    player = newGame.playerTurn,
                     gameId = gameId,
                     flow = this
                 )
@@ -89,7 +89,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
 
     override suspend fun makeMove(at: Coordinate) {
         onGoingGame = checkNotNull(onGoingGame).also {
-            val game = it.copy(first = it.first.makeMove(at))
+            val game = it.copy(first = it.first.makeShot(at, it.first.playerTurn))
             updateGame(game.first, game.second)
         }
 
@@ -100,7 +100,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
         onGoingGame = checkNotNull(onGoingGame).also {
             db.collection(ONGOING)
                 .document(it.second)
-                .update(FORFEIT_FIELD, it.first.localPlayerMarker)
+                .update(FORFEIT_FIELD, it.first.playerTurn.name)
                 .await()
         }
     }
@@ -125,42 +125,47 @@ const val BOARD_FIELD = "board"
 const val FORFEIT_FIELD = "forfeit"
 
 /**
- * [Board] extension function used to convert an instance to a map of key-value
+ * [Game] extension function used to convert an instance to a map of key-value
  * pairs containing the object's properties
  */
-fun Board.toDocumentContent() = mapOf(
-    TURN_FIELD to turn.name,
-    BOARD_FIELD to toMovesList().joinToString(separator = "") {
-        when (it) {
-            Marker.CROSS -> "X"
-            Marker.CIRCLE -> "O"
-            null -> "-"
-        }
-    }
+fun Game.toDocumentContent() = mapOf(
+    TURN_FIELD to board.turn.name,
+    //TODO ()
+    BOARD_FIELD to null
+
+
+//    BOARD_FIELD to board.toMovesList().joinToString(separator = "") {
+//        when (it) {
+//            Marker.CROSS -> "X"
+//            Marker.CIRCLE -> "O"
+//            null -> "-"
+//        }
+//    }
 )
 
 /**
  * Extension function to convert documents stored in the Firestore DB
  * into the corresponding match state.
  */
-fun DocumentSnapshot.toMatchStateOrNull(): Pair<Board, Marker?>? =
+fun DocumentSnapshot.toMatchStateOrNull(): Pair<Board, Player?>? =
     data?.let {
         val moves = it[BOARD_FIELD] as String
-        val turn = Marker.valueOf(it[TURN_FIELD] as String)
+        val turn = Player.valueOf(it[TURN_FIELD] as String)
         val forfeit = it[FORFEIT_FIELD] as String?
         Pair(
             first = Board.fromMovesList(turn, moves.toMovesList()),
-            second =  if (forfeit != null) Marker.valueOf(forfeit) else null
+            second =  if (forfeit != null) Player.valueOf(forfeit) else null
         )
     }
 
 /**
- * Converts this string to a list of moves in the board
+ * Converts this st
+ *
+ * //TODO()
+ * ring to a list of moves in the board
  */
-fun String.toMovesList(): List<Marker?> = map {
+fun String.toMovesList(): List<Square?> = map {
     when (it) {
-        'X' -> Marker.CROSS
-        'O' -> Marker.CIRCLE
         else -> null
     }
 }
