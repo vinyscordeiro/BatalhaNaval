@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import pt.isel.batalha_naval.domain.Lobby
 import pt.isel.batalha_naval.domain.UserInfoRepository
 import pt.isel.batalha_naval.domain.UserInfoRepositorySharedPrefs
+import pt.isel.batalha_naval.services.AppNavigationService
 import pt.isel.batalha_naval.services.LobbyFirebase
 import pt.isel.batalha_naval.services.NavigationService
 
@@ -17,7 +18,7 @@ interface DependencyContainer{
     val lobby: Lobby
 }
 
-class BatalhaNavalApplication(): DependencyContainer, Application() {
+class BatalhaNavalApplication() : Application(), DependencyContainer{
 
 
     private val emulatedFirestoreDb: FirebaseFirestore by lazy {
@@ -32,8 +33,15 @@ class BatalhaNavalApplication(): DependencyContainer, Application() {
     private val realFirestoreDb: FirebaseFirestore by lazy {
         Firebase.firestore
     }
-    override val navigationService: NavigationService?
-        get() = null // TODO()
+
+    companion object
+    {
+        const val DB_NAME = "BATTLESHIP_DB"
+    }
+
+    override val navigationService: NavigationService by lazy {
+        AppNavigationService()
+    }
 
     override val userInfoRepo: UserInfoRepository
         get() = UserInfoRepositorySharedPrefs(this)
