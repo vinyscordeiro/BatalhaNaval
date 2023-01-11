@@ -3,7 +3,7 @@ WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (fil
 WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-00:19:06.150 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-00:19:06.326 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
-00:19:18.343 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - pdm---battleship-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 146ms, init: 0ms
-00:19:18.408 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace pdm---battleship-default-rtdb status Active to Active
+10:57:03.363 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+10:57:03.549 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+10:57:13.919 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - pdm---battleship-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 146ms, init: 0ms
+10:57:13.976 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace pdm---battleship-default-rtdb status Active to Active
