@@ -13,13 +13,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
-import pt.isel.batalha_naval.models.ButtonType
-import pt.isel.batalha_naval.ui.components.ButtonApp
-import pt.isel.batalha_naval.ui.components.PlayersDisplay
+import pt.isel.batalha_naval.ui.components.FavoriteItem
+import pt.isel.batalha_naval.ui.components.GameRoomDisplay
+import java.util.*
 
 @Composable
 @Preview
-fun CreateRoomScreen() {
+fun FavoritesScreen() {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
@@ -34,25 +34,32 @@ fun CreateRoomScreen() {
                 .align(CenterHorizontally),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            text = "Sala #1382")
+            text = "Favoritos")
 
-        Row(
-            modifier = Modifier.padding(0.dp, 4.dp, 0.dp, 30.dp).align(CenterHorizontally)
-        ) {
-            PlayersDisplay(player_1 = "vinyscordeiro", player_2 = "hugoaraujo")
-        }
-
+        //TODO ScrollView Inclusion
         Column(modifier = Modifier
             .align(CenterHorizontally)) {
 
             Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Iniciar")
+                FavoriteItem(
+                    game_id = "138421",
+                    versus_player ="vinicius",
+                    date = Date()
+                )
             }
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Remover Jogador")
+            Row(Modifier.padding(0.dp, 5.dp)) {
+                FavoriteItem(
+                    game_id = "138421",
+                    versus_player ="hugo",
+                    date = Date()
+                )
             }
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Apagar Sala", type = ButtonType.ERROR)
+            Row(Modifier.padding(0.dp, 5.dp)) {
+                FavoriteItem(
+                    game_id = "138421",
+                    versus_player ="diogo",
+                    date = Date()
+                )
             }
         }
     }

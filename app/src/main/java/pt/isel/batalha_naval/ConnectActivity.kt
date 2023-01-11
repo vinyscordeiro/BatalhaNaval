@@ -13,7 +13,7 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
     override val viewModel: ConnectViewModel by viewModels{
         viewModelInit {
             ConnectViewModel(
-                //  TODO INCLUIR DEPENDÊNCIAS
+                //  TODO Incluir dependências.
             )
         }
     }
@@ -22,14 +22,14 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
         super.onCreate(savedInstanceState)
 
         safeSetContent {
-            // TODO Incluir Launched Effect
+            // TODO Incluir Launched Effect.
 
             BattleShipTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color= MaterialTheme.colors.background
                 ) {
-                    // TODO Gerenciar os lobbies
+                    // TODO Gerenciar os lobbies.
                 }
             }
         }
