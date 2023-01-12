@@ -5,5 +5,7 @@ enum class GameCellType {
     FOCUSED,
     SIDE_SHOT,
     INCORRECT_SHOT,
-    CORRECT_SHOT
+    CORRECT_SHOT,
+    POSITION_AVAILABLE,
+    POSITION_INPLACE
 }
