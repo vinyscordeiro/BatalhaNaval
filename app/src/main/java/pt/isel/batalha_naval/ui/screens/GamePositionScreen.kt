@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.ui.components.ButtonApp
-import pt.isel.batalha_naval.ui.components.GameBoard
 import pt.isel.batalha_naval.ui.components.GamePositionBoard
 
 @Composable
@@ -51,7 +50,9 @@ fun GamePositionScreen() {
             .padding(0.dp, 16.dp, 0.dp, 0.dp)) {
 
             Row(modifier = Modifier.align(CenterHorizontally)) {
-                GameBoard()
+
+                //TODO Make Gameboard only
+                // GameBoard()
             }
 
             Row(modifier = Modifier.align(CenterHorizontally)) {

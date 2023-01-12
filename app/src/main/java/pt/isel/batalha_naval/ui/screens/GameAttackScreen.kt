@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.domain.BOARD_SIDE
 import pt.isel.batalha_naval.ui.components.GameBoard
 import pt.isel.batalha_naval.ui.components.PlayerTurn
 
@@ -43,7 +44,12 @@ fun GameAttackScreen() {
             .align(CenterHorizontally)
             .padding(0.dp, 16.dp, 0.dp, 0.dp))
         {
-            GameBoard()
+            GameBoard(
+                List(
+                    size = BOARD_SIDE,
+                    init = { List(size = BOARD_SIDE, init = { null }) }
+                )
+            )
         }
 
     }
