@@ -14,6 +14,7 @@ import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.*
 import pt.isel.batalha_naval.domain.PlayerInfo
 import pt.isel.batalha_naval.domain.UserInfo
+import pt.isel.batalha_naval.ui.screens.IntroScreen
 import pt.isel.batalha_naval.ui.theme.BatalhaNavalTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,8 +34,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
-
+                    IntroScreen()
 
                     runBlocking {
                             app.lobby.enter( PlayerInfo(

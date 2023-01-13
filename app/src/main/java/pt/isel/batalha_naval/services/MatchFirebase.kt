@@ -153,7 +153,7 @@ fun DocumentSnapshot.toMatchStateOrNull(): Pair<Board, Player?>? =
         val turn = Player.valueOf(it[TURN_FIELD] as String)
         val forfeit = it[FORFEIT_FIELD] as String?
         Pair(
-            first = Board.fromMovesList(turn, moves.toMovesList()),
+            first = Board.fromMovesList(turn, moves.toMovesList() as List<Square>),
             second =  if (forfeit != null) Player.valueOf(forfeit) else null
         )
     }

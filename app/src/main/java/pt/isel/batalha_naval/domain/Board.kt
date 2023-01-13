@@ -7,15 +7,15 @@ package pt.isel.batalha_naval.domain
  */
 data class Board(
     val turn: Player = Player.firstToMove,
-    val tiles: List<List<Square?>> =
+    val tiles: List<List<Square>> =
         List(
             size = BOARD_SIDE,
-            init = { List(size = BOARD_SIDE, init = { null }) }
+            init = { List(size = BOARD_SIDE, init = { Square(false, null) }) }
         )
 ) {
 
     companion object {
-        fun fromMovesList(turn: Player, moves: List<Square?>) = Board(
+        fun fromMovesList(turn: Player, moves: List<Square>) = Board(
             turn = turn,
             tiles = List(size = BOARD_SIDE, init = { row ->
                 List(size = BOARD_SIDE, init = { col ->

@@ -23,6 +23,6 @@ fun GameSelection(
 
 @Preview
 @Composable
-fun deteste() {
+fun gameSelectionPreview() {
     GameSelection(title = "A")
 }

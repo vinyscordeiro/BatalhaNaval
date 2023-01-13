@@ -14,16 +14,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pt.isel.batalha_naval.domain.Square
 import pt.isel.batalha_naval.models.GameCellType
 import pt.isel.batalha_naval.ui.theme.*
 
 @Composable
-fun GameCell(
+fun GameCellPosition(
     type: GameCellType = GameCellType.INITIAL
 ) {
+    val square = Square(false, null)
     Box(
         modifier = Modifier(type = type)
     ) {
+        if(square.shot) {
+            if(square.boat != null) {
+                //mostrar correct_shot
+            } else {
+                //mostrar incorrect_shot
+            }
+        } else {
+            //mostrar INITIAL
+        }
         when(type) {
             GameCellType.SIDE_SHOT ->
                 Box(
@@ -117,5 +128,5 @@ fun Modifier(type: GameCellType): Modifier {
 @Preview
 @Composable
 fun myTest() {
-    GameCell();
+    GameCellPosition();
 }

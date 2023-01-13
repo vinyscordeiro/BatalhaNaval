@@ -26,52 +26,52 @@ fun GamePositionBoard() {
     ) {
 
         Row(modifier = rowModifier()) {
-            GameCell(GameCellType.POSITION_AVAILABLE)
-            GameCell(GameCellType.POSITION_AVAILABLE)
-            GameCell(GameCellType.POSITION_AVAILABLE)
-            GameCell(GameCellType.POSITION_AVAILABLE)
+            GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            GameCellPosition(GameCellType.POSITION_AVAILABLE)
         }
         
         Row(modifier = rowModifier()) {
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
-            }
-        }
-
-        Row(modifier = rowModifier()) {
-            Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
-            }
-            Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
-            }
-            Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
         }
 
         Row(modifier = rowModifier()) {
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            }
+        }
+
+        Row(modifier = rowModifier()) {
+            Row(modifier = pieceModifier()) {
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
             Row(modifier = pieceModifier()) {
-                GameCell(GameCellType.POSITION_AVAILABLE)
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            }
+            Row(modifier = pieceModifier()) {
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
+            }
+            Row(modifier = pieceModifier()) {
+                GameCellPosition(GameCellType.POSITION_AVAILABLE)
             }
         }
     }

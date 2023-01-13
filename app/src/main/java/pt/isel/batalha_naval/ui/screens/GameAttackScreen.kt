@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.domain.BOARD_SIDE
+import pt.isel.batalha_naval.domain.Square
 import pt.isel.batalha_naval.ui.components.GameBoard
 import pt.isel.batalha_naval.ui.components.PlayerTurn
 
@@ -47,7 +48,7 @@ fun GameAttackScreen() {
             GameBoard(
                 List(
                     size = BOARD_SIDE,
-                    init = { List(size = BOARD_SIDE, init = { null }) }
+                    init = { List(size = BOARD_SIDE, init = { Square(false, null) }) }
                 )
             )
         }

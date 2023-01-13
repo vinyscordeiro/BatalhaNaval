@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.domain.BOARD_SIDE
+import pt.isel.batalha_naval.domain.Square
 import pt.isel.batalha_naval.ui.components.*
 
 @Composable
@@ -52,7 +53,7 @@ fun FavoriteGameScreen(
             GameBoard(
                 List(
                     size = BOARD_SIDE,
-                    init = { List(size = BOARD_SIDE, init = { null }) }
+                    init = { List(size = BOARD_SIDE, init = { Square(false, null) }) }
                 )
             )
             Column {
