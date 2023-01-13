@@ -72,26 +72,25 @@ data class Board(
 
 
 /**
- * Extension function that checks whether the given marker has won the game
- * @return true if the player with the given marker has won, false otherwise
+ * Extension function that checks whether the given player has won the game
+ * @return true if the player with the given player has won, false otherwise
  */
-fun Board.hasWon(marker: Player): Boolean {
-    return false
+fun Board.hasEnded(player: Player): Boolean {
 
-    //TODO( precisa ser implementado)
+    tiles.map { row ->
+        row.map { square ->
+            if(!square.shot && square.boat != null)
+                return false
+        }
+    }
 
-//    return tiles.any { row -> row.all { it == marker } } ||
-//            (0 until BOARD_SIDE).any { column ->
-//                (0 until BOARD_SIDE).all { row -> tiles[row][column] == marker }
-//            } ||
-//            tiles[0][0] == marker && tiles[1][1] == marker && tiles[2][2] == marker ||
-//            tiles[0][2] == marker && tiles[1][1] == marker && tiles[2][0] == marker
+    //there are boats in the tiles that have not been hit
+    return true
 }
 
 
 open class BoardResult
 class HasWinner(val winner: Player) : BoardResult()
-class Tied : BoardResult()
 class OnGoing : BoardResult()
 
 /**
@@ -99,8 +98,7 @@ class OnGoing : BoardResult()
  */
 fun Board.getResult(): BoardResult =
     when {
-        hasWon(Player.PLAYER1) -> HasWinner(Player.PLAYER1)
-        hasWon(Player.PLAYER2) -> HasWinner(Player.PLAYER2)
-        toMovesList().all { it != null } -> Tied()
+        hasEnded(Player.PLAYER1) -> HasWinner(Player.PLAYER2)
+        hasEnded(Player.PLAYER2) -> HasWinner(Player.PLAYER1)
         else -> OnGoing()
     }

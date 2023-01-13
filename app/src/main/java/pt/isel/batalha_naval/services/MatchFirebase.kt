@@ -29,7 +29,8 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
                             val game = Game(
                                 playerTurn = player,
                                 forfeitedBy = it.second,
-                                board = it.first
+                                boardPlayer1 = it.first.first,
+                                boardPlayer2 = it.first.second
                             )
                             val gameEvent = when {
                                 onGoingGame == null -> GameStarted(game)
@@ -62,8 +63,8 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
 
         return callbackFlow {
             val newGame = Game(
-                playerTurn = getLocalPlayerMarker(localPlayer, challenge),
-                board = Board()
+                playerTurn = getLocalPlayer(localPlayer, challenge),
+                boardPlayer1 = Board()
             )
             val gameId = challenge.challenger.id.toString()
 
@@ -122,6 +123,7 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
 const val ONGOING = "ongoing"
 const val TURN_FIELD = "turn"
 const val BOARD_FIELD = "board"
+const val ENEMY_BOARD_FIELD = "enemyboard"
 const val FORFEIT_FIELD = "forfeit"
 
 /**
@@ -129,7 +131,7 @@ const val FORFEIT_FIELD = "forfeit"
  * pairs containing the object's properties
  */
 fun Game.toDocumentContent() = mapOf(
-    TURN_FIELD to board.turn.name,
+    TURN_FIELD to boardPlayer1.turn.name,
     //TODO ()
     BOARD_FIELD to null
 
@@ -147,13 +149,17 @@ fun Game.toDocumentContent() = mapOf(
  * Extension function to convert documents stored in the Firestore DB
  * into the corresponding match state.
  */
-fun DocumentSnapshot.toMatchStateOrNull(): Pair<Board, Player?>? =
+fun DocumentSnapshot.toMatchStateOrNull(): Pair<Pair<Board, Board?>, Player?>? =
     data?.let {
         val moves = it[BOARD_FIELD] as String
+        val enemymoves = it[ENEMY_BOARD_FIELD] as String
         val turn = Player.valueOf(it[TURN_FIELD] as String)
         val forfeit = it[FORFEIT_FIELD] as String?
         Pair(
-            first = Board.fromMovesList(turn, moves.toMovesList() as List<Square>),
+            first = Pair(
+                first = Board.fromMovesList(turn, moves.toMovesList() as List<Square>),
+                second = Board.fromMovesList(turn, enemymoves.toMovesList() as List<Square>)
+            ),
             second =  if (forfeit != null) Player.valueOf(forfeit) else null
         )
     }
