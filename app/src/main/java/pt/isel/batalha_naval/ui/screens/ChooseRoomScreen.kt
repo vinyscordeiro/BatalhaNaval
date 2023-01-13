@@ -2,6 +2,8 @@ package pt.isel.batalha_naval.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +37,9 @@ fun ChooseRoomScreen() {
             text = "Escolher a sala")
 
         Column(modifier = Modifier
-            .align(CenterHorizontally)) {
+            .align(CenterHorizontally)
+            .verticalScroll(rememberScrollState())
+            .padding(0.dp,0.dp,0.dp, 24.dp)) {
 
             Row(Modifier.padding(0.dp, 4.dp)) {
                 GameRoomDisplay(room_id = "1234", player_id = "vinyscordeiro")
@@ -46,6 +50,7 @@ fun ChooseRoomScreen() {
             Row(Modifier.padding(0.dp, 5.dp)) {
                 GameRoomDisplay(room_id = "4431", player_id = "hugoaraujo")
             }
+
         }
     }
 }

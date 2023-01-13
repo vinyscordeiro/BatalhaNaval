@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import pt.isel.batalha_naval.domain.BOARD_SIDE
-import pt.isel.batalha_naval.domain.Board
 import pt.isel.batalha_naval.domain.Square
 import pt.isel.batalha_naval.models.GameCellType
 

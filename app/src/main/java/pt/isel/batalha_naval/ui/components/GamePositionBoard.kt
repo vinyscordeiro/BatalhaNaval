@@ -20,7 +20,7 @@ fun GamePositionBoard() {
         modifier = Modifier
             .background(Grey)
             .width(320.dp)
-            .height(192.dp)
+            .height(220.dp)
             .border(border = BorderStroke(1.dp, Color.Black))
             .clip(RoundedCornerShape(4.dp))
     ) {
@@ -84,7 +84,7 @@ fun GamePositionBoardTest() {
 }
 
 fun rowModifier() : Modifier {
-    return Modifier.padding(16.dp, 12.dp, 8.dp, 0.dp)
+    return Modifier.padding(16.dp, 12.dp, 8.dp, 8.dp)
 }
 
 fun pieceModifier() : Modifier {

@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,7 @@ fun ButtonApp (
     type : ButtonType? = ButtonType.SELECTION,
     icon: ImageVector? = null,
     text: String,
+    disabled: Boolean = false,
     onClick: (() -> Unit)? = null
 ) {
     Button(
@@ -33,8 +36,14 @@ fun ButtonApp (
             .height(56.dp)
             .shadow(12.dp, shape = RoundedCornerShape(5.dp))
             .padding(0.dp),
-        colors = if(type == ButtonType.ERROR) ButtonDefaults.buttonColors(backgroundColor = ErrorRed) else ButtonDefaults.buttonColors(backgroundColor = MainBlue),
-        onClick = { /*TODO*/ }
+        colors = ButtonDefaults.buttonColors(backgroundColor = getButtonColor(type, disabled)),
+        onClick = {
+            if(!disabled){
+                if (onClick != null) {
+                    onClick()
+                }
+            }
+        }
     ) {
                 if (icon != null) {
                     Icon( imageVector = icon ,modifier = Modifier.size(24.dp) , contentDescription ="icon" )
@@ -49,12 +58,22 @@ fun ButtonApp (
         }
 }
 
-@Preview
 @Composable
+@Preview
 fun testPreview() {
     ButtonApp(
         icon = Icons.Default.Home,
         type = ButtonType.ERROR,
         text = "Home"
     )
+}
+
+fun getButtonColor(type: ButtonType?, disabled: Boolean): Color {
+    if(disabled) {
+        return LightGray
+    }
+    return when (type) {
+        ButtonType.ERROR -> ErrorRed
+        else -> MainBlue
+    }
 }

@@ -19,6 +19,8 @@ import pt.isel.batalha_naval.ui.components.GamePositionBoard
 @Composable
 @Preview
 fun GamePositionScreen() {
+    var isSelected = false;
+    var ships_available = 10;
 
     Column(modifier = Modifier.fillMaxWidth()){
         Row(
@@ -49,23 +51,33 @@ fun GamePositionScreen() {
             .align(CenterHorizontally)
             .padding(0.dp, 16.dp, 0.dp, 0.dp)) {
 
-            Row(modifier = Modifier.align(CenterHorizontally)) {
-
-                //TODO Make Gameboard only
-                // GameBoard()
+            if(isSelected) {
+                Row(modifier = Modifier.align(CenterHorizontally)) {
+                    // TODO Make Gameboard only
+                    // GameBoard()
+                }
+            } else {
+                Row(modifier = Modifier.align(CenterHorizontally)) {
+                    Text(
+                        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 16.dp),
+                        text = "Selecione o navio a posicionar"
+                    )
+                }
+                Row(modifier = Modifier.align(CenterHorizontally)) {
+                    GamePositionBoard()
+                }
             }
 
-            Row(modifier = Modifier.align(CenterHorizontally)) {
-                GamePositionBoard()
-            }
-
-            Row(modifier = Modifier.align(CenterHorizontally).padding(0.dp,8.dp,0.dp,0.dp)) {
+            Row(modifier = Modifier.align(CenterHorizontally).padding(0.dp,24.dp,0.dp,0.dp)) {
                 ButtonApp(
-                    text = "Avançar"
+                    text = "Avançar",
+                    disabled = isFinished(ships_available)
                 )
             }
         }
-
     }
+}
 
+fun isFinished(ships_available: Int): Boolean {
+    return ships_available > 0
 }

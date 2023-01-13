@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.isel.batalha_naval.ui.theme.MainBlue
-import java.text.DateFormat.getDateInstance
 import java.util.*
 
 
@@ -72,14 +71,9 @@ fun testFavItem() {
     )
 }
 
-// TODO Format date
 
 fun getFormattedDate(date: Date): String {
     return DateFormat.format("dd-MM-yyyy", date).toString()
-}
-
-fun Modifier.background(winner: String) {
-   TODO("wINNER BLUE - LOOSER RED")
 }
 
 
