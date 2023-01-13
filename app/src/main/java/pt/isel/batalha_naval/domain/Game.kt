@@ -1,10 +1,8 @@
 package pt.isel.batalha_naval.domain
 
-
-
 /**
  * Represents a BattleShip game. Instances are immutable.
- * @property localPlayerMarker  The local player marker
+ * @property playerTurn         The local player to play
  * @property forfeitedBy        The marker of the player who forfeited the game, if that was the case
  * @property board              The game board
  * @property enemyBoard         The enemy game board
