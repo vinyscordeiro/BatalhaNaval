@@ -48,6 +48,12 @@ fun GameCell(
                     modifier = Modifier
                         .align(Alignment.Center),
                     fontSize = 20.sp)
+
+            GameCellType.POSITION_INPLACE ->
+                Text(text = "V",
+                    modifier = Modifier
+                        .align(Alignment.Center),
+                    fontSize = 20.sp)
             else -> {}
         }
 
@@ -87,6 +93,20 @@ fun Modifier(type: GameCellType): Modifier {
         GameCellType.CORRECT_SHOT ->
             Modifier
                 .background(GameRed)
+                .border(border = BorderStroke(1.dp, Color.Black))
+                .width(32.dp)
+                .height(32.dp)
+
+        GameCellType.POSITION_AVAILABLE ->
+            Modifier
+                .background(GameBlue)
+                .border(border = BorderStroke(1.dp, Color.Black))
+                .width(32.dp)
+                .height(32.dp)
+
+        GameCellType.POSITION_INPLACE ->
+            Modifier
+                .background(Grey)
                 .border(border = BorderStroke(1.dp, Color.Black))
                 .width(32.dp)
                 .height(32.dp)

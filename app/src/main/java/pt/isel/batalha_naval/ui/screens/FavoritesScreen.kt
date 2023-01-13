@@ -2,6 +2,8 @@ package pt.isel.batalha_naval.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,9 +38,11 @@ fun FavoritesScreen() {
             fontWeight = FontWeight.Bold,
             text = "Favoritos")
 
-        //TODO ScrollView Inclusion
         Column(modifier = Modifier
-            .align(CenterHorizontally)) {
+            .align(CenterHorizontally)
+            .verticalScroll(rememberScrollState())
+            .padding(0.dp,0.dp,0.dp, 24.dp)
+        ) {
 
             Row(Modifier.padding(0.dp, 4.dp)) {
                 FavoriteItem(
