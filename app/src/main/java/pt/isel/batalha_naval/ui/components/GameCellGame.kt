@@ -6,6 +6,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -20,12 +23,16 @@ import pt.isel.batalha_naval.ui.theme.*
 
 @Composable
 fun GameCellGame(
-    square: Square = Square(false, null)
+    square: Square = Square(false, null),
+    onClick: (() -> Unit)? = null
 ) {
     Button(
-        modifier = Modifier(square = square),
+        modifier = Modifier(),
+        colors = getGameCellColor(square = square),
         onClick = {
-            //TODO MakeMove
+            if(onClick != null) {
+                onClick()
+            }
         }
     ) {
         if(square.shot) {
@@ -47,28 +54,26 @@ fun GameCellGame(
     }
 }
 
-fun Modifier(square: Square): Modifier {
+@Composable
+fun getGameCellColor(square: Square):ButtonColors {
     if(square.shot) {
         if(square.boat != null) {
-           return Modifier
-               .background(GameRed)
-               .border(border = BorderStroke(1.dp, Color.Black))
-               .width(32.dp)
-               .height(32.dp)
+           return buttonColors(backgroundColor = GameRed)
         } else {
-            return Modifier
-                .background(GameBlue)
-                .border(border = BorderStroke(1.dp, Color.Black))
-                .width(32.dp)
-                .height(32.dp)
+            return buttonColors(backgroundColor = GameBlue)
         }
     }
+    return buttonColors(backgroundColor = Grey)
+}
+
+fun Modifier(): Modifier {
     return Modifier
-        .background(Grey)
+        .background(GameRed)
         .border(border = BorderStroke(1.dp, Color.Black))
         .width(32.dp)
         .height(32.dp)
 }
+
 
 @Preview
 @Composable

@@ -44,7 +44,7 @@ fun GameBoard(
             GameSelection(title = "2")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = secondRow.get(i))
+                GameCellGame(square = secondRow.get(i))
             }
         }
         Row() {
@@ -53,7 +53,7 @@ fun GameBoard(
             GameSelection(title = "3")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = thirdRow.get(i))
+                GameCellGame(square = thirdRow.get(i))
             }
         }
         Row() {
@@ -62,7 +62,7 @@ fun GameBoard(
             GameSelection(title = "4")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = forthRow.get(i))
+                GameCellGame(square = forthRow.get(i))
             }
         }
         Row() {
@@ -71,7 +71,7 @@ fun GameBoard(
             GameSelection(title = "5")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = fifthRow.get(i))
+                GameCellGame(square = fifthRow.get(i))
             }
         }
         Row() {
@@ -80,7 +80,7 @@ fun GameBoard(
             GameSelection(title = "6")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = sixthRow.get(i))
+                GameCellGame(square = sixthRow.get(i))
             }
         }
         Row() {
@@ -89,7 +89,7 @@ fun GameBoard(
             GameSelection(title = "7")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = seventhRow.get(i))
+                GameCellGame(square = seventhRow.get(i))
             }
         }
         Row() {
@@ -98,7 +98,7 @@ fun GameBoard(
             GameSelection(title = "8")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = eighthRow.get(i))
+                GameCellGame(square = eighthRow.get(i))
             }
         }
         Row() {
@@ -107,7 +107,7 @@ fun GameBoard(
             GameSelection(title = "9")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = ninethRow.get(i))
+                GameCellGame(square = ninethRow.get(i))
             }
         }
         Row() {
@@ -116,7 +116,7 @@ fun GameBoard(
             GameSelection(title = "10")
 
             for( i in 0 until BOARD_SIDE){
-                getGameCell(square = tenthRow.get(i))
+                GameCellGame(square = tenthRow.get(i))
             }
         }
     }
