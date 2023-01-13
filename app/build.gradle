@@ -29,8 +29,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -64,6 +64,29 @@ dependencies {
     // Declare the dependency for the Cloud Firestore library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+
+    implementation("androidx.room:room-runtime:2.4.3")
+    annotationProcessor("androidx.room:room-compiler:2.4.3")
+
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.4.3")
+
+    // optional - RxJava2 support for Room
+    implementation("androidx.room:room-rxjava2:2.4.3")
+
+    // optional - RxJava3 support for Room
+    implementation("androidx.room:room-rxjava3:2.4.3")
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation("androidx.room:room-guava:2.4.3")
+
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:2.4.3")
+
+    // optional - Paging 3 Integration
+    implementation("androidx.room:room-paging:2.4.3")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

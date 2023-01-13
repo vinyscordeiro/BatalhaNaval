@@ -32,7 +32,7 @@ open class ViewModelBase : ViewModel() {
         }
     }
 
-    protected suspend fun safeViewModelScopeLaunch(func: suspend () -> Unit) : Job {
+    protected fun safeViewModelScopeLaunch(func: suspend () -> Unit) : Job {
         return viewModelScope.launch { 
             safeSuspend {
                 try {

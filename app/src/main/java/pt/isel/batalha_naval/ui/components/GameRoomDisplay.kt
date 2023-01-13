@@ -5,6 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,18 +24,23 @@ import pt.isel.batalha_naval.ui.theme.MainBlue
 @Composable
 fun GameRoomDisplay(
     room_id : String = "loading...",
-    player_id : String = "loading..."
+    player_id : String = "loading...",
+    onClick: (() -> Unit)? = null
 ) {
 
-    Row(
+    Button(
         modifier = Modifier
             .clip(RoundedCornerShape(6.dp))
             .border(border = BorderStroke(2.dp, Color.Black), shape = RoundedCornerShape(6.dp))
-            .background(MainBlue)
             .width(320.dp)
             .height(80.dp)
-            .padding(12.dp)
-            .shadow(4.dp, RoundedCornerShape(6.dp))
+            .shadow(4.dp, RoundedCornerShape(6.dp)),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MainBlue),
+        onClick = {
+            if (onClick != null) {
+                onClick()
+            }
+        }
     ) {
         Column(
             modifier = ColumnModifier,

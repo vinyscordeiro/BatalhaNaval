@@ -32,7 +32,8 @@ class AppNavigationService (): NavigationService {
         TODO("Not yet implemented")
     }
 
-    override fun navigateToGame(ctx: Context) {
+    override fun navigateToGame(ctx: Context, gameId: String) {
         TODO("Not yet implemented")
     }
+
 }

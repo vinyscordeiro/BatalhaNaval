@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,22 +35,25 @@ fun GameCellGame(
             }
         }
     ) {
-        if(square.shot) {
-            if(square.boat != null) {
-                Text(text = "X",
-                    modifier = Modifier
-                        .align(CenterVertically),
-                    fontSize = 20.sp)
-            } else {
-                Box(
-                    modifier = Modifier
-                        .size(5.dp)
-                        .clip(RoundedCornerShape(5.dp))
-                        .background(GameBlack)
-                        .align(CenterVertically)
-                )
+        Box(modifier = Modifier.align(CenterVertically)){
+            if(square.shot) {
+                if(square.boat != null) {
+                    Text(text = "X",
+                        modifier = Modifier
+                            .align(Center),
+                        fontSize = 20.sp)
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(5.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .background(GameBlack)
+                            .align(Center)
+                    )
+                }
             }
         }
+
     }
 }
 
@@ -68,15 +71,13 @@ fun getGameCellColor(square: Square):ButtonColors {
 
 fun Modifier(): Modifier {
     return Modifier
-        .background(GameRed)
         .border(border = BorderStroke(1.dp, Color.Black))
         .width(32.dp)
         .height(32.dp)
 }
 
-
 @Preview
 @Composable
 fun gameCellGamePreview() {
-    GameCellGame();
+    GameCellGame()
 }

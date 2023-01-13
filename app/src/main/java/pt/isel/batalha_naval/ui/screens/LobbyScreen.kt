@@ -13,12 +13,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.models.ButtonType
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.components.ButtonApp
 import pt.isel.batalha_naval.ui.components.PlayersDisplay
 
 @Composable
-@Preview
-fun LobbyScreen() {
+fun LobbyScreen(
+    startGame: (Lobby) -> Unit,
+    removeUser: (Lobby) -> Unit,
+    leaveLobby: (Lobby) -> Unit
+) {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
@@ -45,13 +49,30 @@ fun LobbyScreen() {
             .align(CenterHorizontally)) {
 
             Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Iniciar")
+                ButtonApp(
+                    text = "Iniciar",
+                    onClick = {
+                        // Start game
+                        // startGame()
+                    }
+                )
             }
             Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Remover Jogador")
+                ButtonApp(
+                    text = "Remover Jogador",
+                    onClick = {
+                        // Start game
+                        // removePlayer()
+                    })
             }
             Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(text = "Apagar Sala", type = ButtonType.ERROR)
+                ButtonApp(
+                    text = "Apagar Sala",
+                    type = ButtonType.ERROR,
+                    onClick = {
+                        // Start game
+                        // startGame()
+                    })
             }
         }
     }

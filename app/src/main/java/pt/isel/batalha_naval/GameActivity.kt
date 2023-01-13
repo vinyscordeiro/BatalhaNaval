@@ -8,11 +8,9 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
-import pt.isel.batalha_naval.ui.screens.ChooseRoomScreen
-import pt.isel.batalha_naval.ui.screens.IntroScreen
 import pt.isel.batalha_naval.viewmodel.ConnectViewModel
 
-class ConnectActivity : BaseActivity<ConnectViewModel>() {
+class GameActivity : BaseActivity<ConnectViewModel>() {
     override val viewModel: ConnectViewModel by viewModels{
         viewModelInit {
             ConnectViewModel(
@@ -30,7 +28,7 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
             LaunchedEffect(viewModel.gameId) {
                 if (viewModel.gameId != null)
                     // should not be possible a null navigation service
-                    navigationService?.navigateToGame(this@ConnectActivity, viewModel.gameId!!)
+                    navigationService?.navigateToGame(this@GameActivity, viewModel.gameId!!)
 
             }
 

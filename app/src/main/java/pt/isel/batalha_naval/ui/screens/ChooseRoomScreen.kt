@@ -15,11 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.components.GameRoomDisplay
 
 @Composable
-@Preview
-fun ChooseRoomScreen() {
+fun ChooseRoomScreen(
+    lobbies: List<Lobby>,
+    joinLobby: (Lobby) -> Unit
+) {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
@@ -41,14 +44,16 @@ fun ChooseRoomScreen() {
             .verticalScroll(rememberScrollState())
             .padding(0.dp,0.dp,0.dp, 24.dp)) {
 
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                GameRoomDisplay(room_id = "1234", player_id = "vinyscordeiro")
-            }
-            Row(Modifier.padding(0.dp, 5.dp)) {
-                GameRoomDisplay(room_id = "3214", player_id = "laracordeiro")
-            }
-            Row(Modifier.padding(0.dp, 5.dp)) {
-                GameRoomDisplay(room_id = "4431", player_id = "hugoaraujo")
+            lobbies.forEach {
+                Row(Modifier.padding(0.dp, 4.dp)) {
+                    GameRoomDisplay(
+                        room_id = it.gameId,
+                        player_id = it.displayName,
+                        onClick = {
+                            // TODO Entra no lobby
+                        }
+                    )
+                }
             }
 
         }

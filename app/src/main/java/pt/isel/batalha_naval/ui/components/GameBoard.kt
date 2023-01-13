@@ -126,7 +126,7 @@ fun GameBoard(
 fun getGameCell(square: Square?) {
     if (square != null){
         if(square.shot){
-            if(square.boat != null){
+            if(square.boat != null) {
                 return GameCellGame(square)
             } else {
                 return GameCellGame(square)
@@ -141,7 +141,7 @@ fun gameboardPrevier() {
     GameBoard(
         List(
             size = BOARD_SIDE,
-            init = { List(size = BOARD_SIDE, init = { Square(false, null) }) }
+            init = { List(size = BOARD_SIDE, init = { Square(true, null) }) }
         )
     )
 }

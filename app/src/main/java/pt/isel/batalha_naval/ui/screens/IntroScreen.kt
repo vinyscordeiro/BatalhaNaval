@@ -14,8 +14,11 @@ import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.ui.components.ButtonApp
 
 @Composable
-@Preview
-fun IntroScreen() {
+fun IntroScreen(
+    createLobby: () -> Unit,
+    getLobies:() -> Unit,
+    getFavorites: () -> Unit
+) {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
@@ -26,13 +29,30 @@ fun IntroScreen() {
             .padding(0.dp, 140.dp, 0.dp, 0.dp)
             .align(CenterHorizontally)) {
             Row(Modifier.padding(0.dp, 5.dp)) {
-                ButtonApp(text = "Criar Sala")
+                ButtonApp(
+                    text = "Criar Sala",
+                    onClick = {
+                        // TODO CREATE LOBIES
+                        // createLobby
+                    }
+                    )
             }
             Row(Modifier.padding(0.dp, 5.dp)) {
-                ButtonApp(text = "Entrar Sala")
+                ButtonApp(
+                    text = "Entrar Sala",
+                    onClick = {
+                        // TODO JOIN LOBIES
+                        // GETLobby
+                    })
             }
             Row(Modifier.padding(0.dp, 5.dp)) {
-                ButtonApp(text = "Favoritos")
+                ButtonApp(
+                    text = "Favoritos",
+                    onClick = {
+                        // GET FAVORTIES
+                        // GET FAVORITES
+                    }
+                    )
             }
             Text(
                 modifier = Modifier.padding(0.dp, 30.dp, 0.dp, 0.dp).align(CenterHorizontally),
