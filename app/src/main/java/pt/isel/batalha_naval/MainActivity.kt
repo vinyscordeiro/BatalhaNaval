@@ -42,7 +42,7 @@ class MainActivity : BaseActivity<SettingsViewModel>() {
                     InitialScreen(
                         username = viewModel.username,
                         onUsernameChange = {
-                            viewModel.username = it
+                            viewModel.username = it.trim()
                         },
                         onSetupCompleted = {
                             viewModel.saveUserData()

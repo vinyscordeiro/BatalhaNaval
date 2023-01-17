@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -29,14 +31,25 @@ fun InitialScreen(
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
-            .size(300.dp)
+            .size(280.dp)
             .align(CenterHorizontally), contentDescription = "Batalha Naval Logo")
 
         Column(modifier = Modifier
-            .padding(0.dp, 140.dp, 0.dp, 0.dp)
+            .padding(0.dp, 30.dp, 0.dp, 0.dp)
             .align(CenterHorizontally)) {
-            Row(Modifier.padding(0.dp, 5.dp)) {
-                TextField(value = username, onValueChange = onUsernameChange)
+            Row(modifier = Modifier
+                .padding(0.dp, 10.dp)
+                .align(CenterHorizontally)) {
+                Text(text = "Digite vosso username")
+            }
+            Row(modifier = Modifier
+                .padding(0.dp, 5.dp)
+                .align(CenterHorizontally)) {
+                TextField(
+                    value = username,
+                    onValueChange = onUsernameChange,
+                    singleLine = true
+                )
             }
 
             Row(Modifier.padding(0.dp, 5.dp)) {
@@ -46,11 +59,6 @@ fun InitialScreen(
                     onClick = { onSetupCompleted() }
                 )
             }
-            Text(
-                modifier = Modifier
-                    .padding(0.dp, 30.dp, 0.dp, 0.dp)
-                    .align(CenterHorizontally),
-                text = "Versão 1.0")
         }
 
     }

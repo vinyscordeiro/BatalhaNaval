@@ -14,7 +14,6 @@ import pt.isel.batalha_naval.ui.components.ButtonApp
 
 @Composable
 fun IntroMenuScreen(
-    userName: String,
     createLobby: () -> Unit,
     getLobbies:() -> Unit,
     getFavorites: () -> Unit

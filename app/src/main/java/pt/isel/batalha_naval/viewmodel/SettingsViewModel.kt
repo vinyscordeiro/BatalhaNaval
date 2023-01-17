@@ -14,7 +14,6 @@ class SettingsViewModel(
 
     fun userDataExists(): Boolean {
         return userRepo.getUserInfo() != null
-
     }
 
     fun loadUserData()
