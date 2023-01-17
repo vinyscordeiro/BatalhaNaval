@@ -1,8 +1,8 @@
 package pt.isel.batalha_naval
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -12,12 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.*
-import pt.isel.batalha_naval.domain.PlayerInfo
-import pt.isel.batalha_naval.domain.UserInfo
-import pt.isel.batalha_naval.ui.screens.IntroScreen
+import pt.isel.batalha_naval.helpers.viewModelInit
+import pt.isel.batalha_naval.ui.screens.InitialScreen
 import pt.isel.batalha_naval.ui.theme.BatalhaNavalTheme
+import pt.isel.batalha_naval.viewmodel.SettingsViewModel
 
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivity<SettingsViewModel>() {
+
+    override val viewModel: SettingsViewModel by viewModels {
+        viewModelInit {
+            SettingsViewModel(dependencyContainer.userInfoRepo)
+        }
+    }
 
     val app by lazy {
         (application as DependencyContainer)
@@ -34,10 +40,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    //IntroScreen()
+                    InitialScreen(
+                        username = viewModel.username,
+                        onUsernameChange = {
+                            viewModel.username = it
+                        },
+                        onSetupCompleted = {
+                            viewModel.saveUserData()
+                            // TODO NAVIGATE TO INTRO MENU SCREEN
+                        }
+                    )
 
                     runBlocking {
-                            app.gameService.create("teste")
+                   // Aqui está a dar erro isso. E suposto isso estar aqui?
+                    //         app.gameService.create("teste")
                     }
 
                 }

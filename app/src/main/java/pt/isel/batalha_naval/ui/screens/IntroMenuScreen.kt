@@ -8,15 +8,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.ui.components.ButtonApp
 
 @Composable
-fun IntroScreen(
+fun IntroMenuScreen(
+    userName: String,
     createLobby: () -> Unit,
-    getLobies:() -> Unit,
+    getLobbies:() -> Unit,
     getFavorites: () -> Unit
 ) {
 
@@ -32,27 +32,24 @@ fun IntroScreen(
                 ButtonApp(
                     text = "Criar Sala",
                     onClick = {
-                        // TODO CREATE LOBIES
-                        // createLobby
+                        createLobby()
                     }
-                    )
+                )
             }
             Row(Modifier.padding(0.dp, 5.dp)) {
                 ButtonApp(
                     text = "Entrar Sala",
                     onClick = {
-                        // TODO JOIN LOBIES
-                        // GETLobby
+                        getLobbies()
                     })
             }
             Row(Modifier.padding(0.dp, 5.dp)) {
                 ButtonApp(
                     text = "Favoritos",
                     onClick = {
-                        // GET FAVORTIES
-                        // GET FAVORITES
+                        getFavorites()
                     }
-                    )
+                )
             }
             Text(
                 modifier = Modifier.padding(0.dp, 30.dp, 0.dp, 0.dp).align(CenterHorizontally),
