@@ -9,6 +9,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.flow.callbackFlow
 import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.domain.*
+import pt.isel.batalha_naval.models.BattleshipLobby
 import java.util.*
 
 class UnreachableLobbyException : Exception()
@@ -21,7 +22,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
     private var state: LobbyState = Idle
 
     private suspend fun addLocalPlayer(localPlayer: PlayerInfo): DocumentReference {
-        val docRef = db.collection(LOBBY).document(localPlayer.id.toString())
+        val docRef = db.collection(LOBBY).document(localPlayer.id.toString(), )
         docRef
             .set(localPlayer.info.toDocumentContent())
             .await()
@@ -32,7 +33,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
         db.collection(LOBBY).addSnapshotListener { snapshot, error ->
             when {
                 error != null -> flow.close(error)
-                snapshot != null -> flow.trySend(RosterUpdated(snapshot.toPlayerList()))
+                snapshot != null -> flow.trySend(RosterUpdated(snapshot.toBattleshipLobbyList()))
             }
         }
 
@@ -51,21 +52,21 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
         }
     }
 
-    override suspend fun getPlayers(): List<PlayerInfo> {
+    override suspend fun getLobbies(): List<BattleshipLobby> {
         try {
             val result = db.collection(LOBBY).get().await()
-            return result.map { it.toPlayerInfo() }
+            return result.map { it.toBattleshipLobby() }
         }
         catch (e: Throwable) {
             throw UnreachableLobbyException()
         }
     }
 
-    override suspend fun enter(localPlayer: PlayerInfo): List<PlayerInfo> {
+    override suspend fun enter(localPlayer: PlayerInfo): List<BattleshipLobby> {
         check(state == Idle)
         try {
             state = InUse(localPlayer, addLocalPlayer(localPlayer))
-            return getPlayers()
+            return getLobbies()
         }
         catch (e: Throwable) {
             throw UnreachableLobbyException()
@@ -145,7 +146,7 @@ private object Idle : LobbyState()
  */
 const val LOBBY = "lobby"
 const val NICK_FIELD = "nick"
-const val MOTO_FIELD = "moto"
+const val LOBBY_ID_FIELD = "lobby_id"
 const val CHALLENGER_FIELD = "challenger"
 const val CHALLENGER_ID_FIELD = "id"
 
@@ -153,12 +154,14 @@ const val CHALLENGER_ID_FIELD = "id"
  * Extension function used to convert player info documents stored in the Firestore DB
  * into [PlayerInfo] instances.
  */
-fun QueryDocumentSnapshot.toPlayerInfo() =
-    PlayerInfo(
+fun QueryDocumentSnapshot.toBattleshipLobby() =
+    BattleshipLobby(PlayerInfo(
         info = UserInfo(
             nick = data[NICK_FIELD] as String
         ),
         id = UUID.fromString(id),
+    ),
+        data[LOBBY_ID_FIELD] as String
     )
 
 /**
@@ -200,7 +203,7 @@ fun playerInfoFromDocContent(properties: Map<String, Any>) = PlayerInfo(
     id = UUID.fromString(properties[CHALLENGER_ID_FIELD] as String)
 )
 
-fun QuerySnapshot.toPlayerList() = map { it.toPlayerInfo() }
+fun QuerySnapshot.toBattleshipLobbyList() = map { it.toBattleshipLobby() }
 
 /**
  * [UserInfo] extension function used to convert an instance to a map of key-value
