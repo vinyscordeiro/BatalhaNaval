@@ -31,8 +31,13 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
                     color= MaterialTheme.colors.background
                 ) {
 
-                    if (viewModel.isJoiningOrWaitingForPlayer) {
-                        LobbyScreen()
+                    if (viewModel.currentLobby != null) {
+                        LobbyScreen(
+                            lobby = viewModel.currentLobby!!,
+                            leaveLobby = {
+                                viewModel.leaveLobby()
+                            }
+                        )
                     } else {
                         IntroMenuScreen(
                             createLobby = { viewModel.createLobby() },

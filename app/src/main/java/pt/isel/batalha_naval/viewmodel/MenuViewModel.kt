@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Job
 import pt.isel.batalha_naval.domain.Lobby
+import pt.isel.batalha_naval.models.LobbyModel
 import pt.isel.batalha_naval.repositories.UserInfoRepository
 
 class MenuViewModel (
@@ -12,8 +13,8 @@ class MenuViewModel (
         private val userRepository: UserInfoRepository
         ): ViewModelBase () {
 
-        var lobbies by mutableStateOf<List<Lobby>>(emptyList())
-        //var currentLobby by mutableStateOf<Lobby?>(null)
+        var lobbies by mutableStateOf<List<LobbyModel>>(emptyList())
+        var currentLobby by mutableStateOf<LobbyModel?>(null)
         var gameId by mutableStateOf<String?>(null)
 
         val isJoiningOrWaitingForPlayer: Boolean

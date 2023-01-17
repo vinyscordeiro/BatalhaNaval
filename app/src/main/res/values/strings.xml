@@ -3,5 +3,6 @@
     <string name="error">Error</string>
     <string name="error_button">ok</string>
     <string name="title_settings_activity">SettingsActivity</string>
+    <string name="title_menu_activity">MenuActivity</string>
     <string name="title_initial_activity">Initial</string>
 </resources>

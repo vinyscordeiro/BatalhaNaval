@@ -11,15 +11,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.domain.Lobby
+import pt.isel.batalha_naval.domain.PlayerInfo
+import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.models.ButtonType
+import pt.isel.batalha_naval.models.LobbyModel
 import pt.isel.batalha_naval.ui.components.ButtonApp
 import pt.isel.batalha_naval.ui.components.PlayersDisplay
 
 @Composable
 fun LobbyScreen(
-    /*startGame: (Lobby) -> Unit,
-    removeUser: (Lobby) -> Unit,
-    leaveLobby: (Lobby) -> Unit*/
+    lobby: LobbyModel,
+    leaveLobby: () -> Unit
 ) {
 
     Column(modifier = Modifier.fillMaxWidth()){
@@ -35,12 +38,12 @@ fun LobbyScreen(
                 .align(CenterHorizontally),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            text = "Sala #1382")
+            text = "Sala #"+lobby.lobbyId)
 
         Row(
             modifier = Modifier.padding(0.dp, 4.dp, 0.dp, 30.dp).align(CenterHorizontally)
         ) {
-            PlayersDisplay(player_1 = "vinyscordeiro", player_2 = "hugoaraujo")
+            PlayersDisplay(player_1 = lobby.playerInfo.info.nick, player_2 = "Aguardando...")
         }
 
         Column(modifier = Modifier
@@ -48,28 +51,10 @@ fun LobbyScreen(
 
             Row(Modifier.padding(0.dp, 4.dp)) {
                 ButtonApp(
-                    text = "Iniciar",
-                    onClick = {
-                        // Start game
-                        // startGame()
-                    }
-                )
-            }
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(
-                    text = "Remover Jogador",
-                    onClick = {
-                        // Start game
-                        // removePlayer()
-                    })
-            }
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                ButtonApp(
                     text = "Apagar Sala",
                     type = ButtonType.ERROR,
                     onClick = {
-                        // Start game
-                        // startGame()
+                        leaveLobby()
                     })
             }
         }

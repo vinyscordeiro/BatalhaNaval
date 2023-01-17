@@ -58,7 +58,7 @@ class MainActivity : BaseActivity<SettingsViewModel>() {
                         },
                         onSetupCompleted = {
                             viewModel.saveUserData()
-                            // TODO NAVIGATE TO INTRO MENU SCREEN
+                            navigationService?.navigateToMenu(this)
                         }
                     )
 
