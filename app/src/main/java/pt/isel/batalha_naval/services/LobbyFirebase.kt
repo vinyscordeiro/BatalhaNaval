@@ -22,7 +22,8 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
     private var state: LobbyState = Idle
 
     private suspend fun addLocalPlayer(localPlayer: PlayerInfo): DocumentReference {
-        val docRef = db.collection(LOBBY).document(localPlayer.id.toString(), )
+        val docRef = db.collection(LOBBY)
+            .document(localPlayer.id.toString(), )
         docRef
             .set(localPlayer.info.toDocumentContent())
             .await()
@@ -58,6 +59,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
             return result.map { it.toBattleshipLobby() }
         }
         catch (e: Throwable) {
+            println(e)
             throw UnreachableLobbyException()
         }
     }
@@ -161,7 +163,7 @@ fun QueryDocumentSnapshot.toBattleshipLobby() =
         ),
         id = UUID.fromString(id),
     ),
-        data[LOBBY_ID_FIELD] as String
+        lobbyId = data[LOBBY_ID_FIELD] as Long
     )
 
 /**
@@ -210,5 +212,6 @@ fun QuerySnapshot.toBattleshipLobbyList() = map { it.toBattleshipLobby() }
  * pairs containing the object's properties
  */
 fun UserInfo.toDocumentContent() = mapOf(
-    NICK_FIELD to nick
+    NICK_FIELD to nick,
+    LOBBY_ID_FIELD to (1000..9999).random()
 )

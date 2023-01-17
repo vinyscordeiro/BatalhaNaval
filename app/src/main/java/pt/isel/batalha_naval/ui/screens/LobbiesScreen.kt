@@ -46,8 +46,8 @@ fun LobbiesScreen(
             lobbies.forEach {
                 Row(Modifier.padding(0.dp, 4.dp)) {
                     GameRoomDisplay(
-                        room_id = it.lobbyId,
-                        player_id = it.lobbyId,
+                        room_id = it.lobbyId.toString(),
+                        player_id = it.lobbyId.toString(),
                         onClick = {
                             joinLobby(it)
                         }

@@ -11,6 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.FirebaseApp
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
+import pt.isel.batalha_naval.domain.PlayerInfo
+import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.helpers.viewModelInit
 import pt.isel.batalha_naval.ui.screens.InitialScreen
 import pt.isel.batalha_naval.ui.theme.BatalhaNavalTheme
@@ -31,6 +35,14 @@ class MainActivity : BaseActivity<SettingsViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
+
+        runBlocking {
+            //TESTES
+            dependencyContainer.lobby.enter(PlayerInfo(UserInfo("teste")))
+            dependencyContainer.lobby.enterAndObserve(PlayerInfo(UserInfo("teste3")))
+            dependencyContainer.lobby.issueChallenge(PlayerInfo(UserInfo("teste2")))
+        }
+
 
         setContent {
             BatalhaNavalTheme {
