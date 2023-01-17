@@ -2,7 +2,6 @@ package pt.isel.batalha_naval.services
 
 import android.content.Context
 import android.content.Intent
-import pt.isel.batalha_naval.ConnectActivity
 
 class AppNavigationService (): NavigationService {
 
@@ -21,7 +20,7 @@ class AppNavigationService (): NavigationService {
     }
 
     override fun navigateToMenu(ctx: Context) {
-        navigateTo<ConnectActivity>(ctx)
+        //navigateTo<ConnectActivity>(ctx)
     }
 
     override fun navigateToRooms(ctx: Context) {

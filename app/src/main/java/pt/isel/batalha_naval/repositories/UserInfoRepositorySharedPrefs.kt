@@ -14,23 +14,23 @@ class UserInfoRepositorySharedPrefs(private val context: Context): UserInfoRepos
         context.getSharedPreferences("UserInfoPrefs", Context.MODE_PRIVATE)
     }
 
-    override var userInfo: UserInfo?
-        get() {
-            val savedNick = prefs.getString(userNickKey, null)
-            return if (savedNick != null)
-                UserInfo(savedNick)
-            else
-                null
-        }
+    override fun getUserInfo(): UserInfo? {
+        val savedNick = prefs.getString(userNickKey, null)
+        return if (savedNick != null)
+            UserInfo(savedNick)
+        else
+            null
+    }
 
-        set(value) {
-            if (value == null)
-                prefs.edit()
-                    .remove(userNickKey)
-                    .apply()
-            else
-                prefs.edit()
-                    .putString(userNickKey, value.nick)
-                    .apply()
-        }
+    override fun setUserInfo(userInfo: UserInfo?){
+        if (userInfo == null)
+            prefs.edit()
+                .remove(userNickKey)
+                .apply()
+        else
+            prefs.edit()
+                .putString(userNickKey, userInfo.nick)
+                .apply()
+    }
+
 }

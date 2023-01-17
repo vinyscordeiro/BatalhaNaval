@@ -156,8 +156,7 @@ const val CHALLENGER_ID_FIELD = "id"
 fun QueryDocumentSnapshot.toPlayerInfo() =
     PlayerInfo(
         info = UserInfo(
-            nick = data[NICK_FIELD] as String,
-            moto = data[MOTO_FIELD] as String?
+            nick = data[NICK_FIELD] as String
         ),
         id = UUID.fromString(id),
     )
@@ -168,7 +167,6 @@ fun QueryDocumentSnapshot.toPlayerInfo() =
  */
 fun PlayerInfo.toDocumentContent() = mapOf(
     NICK_FIELD to info.nick,
-    MOTO_FIELD to info.moto,
     CHALLENGER_ID_FIELD to id.toString()
 )
 
@@ -189,8 +187,7 @@ fun DocumentSnapshot.toChallengeOrNull(): Challenge? {
 
 fun DocumentSnapshot.toPlayerInfo() = PlayerInfo(
     info = UserInfo(
-        nick = data?.get(NICK_FIELD) as String,
-        moto = data?.get(MOTO_FIELD) as String?
+        nick = data?.get(NICK_FIELD) as String
     ),
     id = UUID.fromString(id)
 )
@@ -198,8 +195,7 @@ fun DocumentSnapshot.toPlayerInfo() = PlayerInfo(
 
 fun playerInfoFromDocContent(properties: Map<String, Any>) = PlayerInfo(
     info = UserInfo(
-        nick = properties[NICK_FIELD] as String,
-        moto = properties[MOTO_FIELD] as String?,
+        nick = properties[NICK_FIELD] as String
     ),
     id = UUID.fromString(properties[CHALLENGER_ID_FIELD] as String)
 )
@@ -211,6 +207,5 @@ fun QuerySnapshot.toPlayerList() = map { it.toPlayerInfo() }
  * pairs containing the object's properties
  */
 fun UserInfo.toDocumentContent() = mapOf(
-    NICK_FIELD to nick,
-    MOTO_FIELD to moto
+    NICK_FIELD to nick
 )

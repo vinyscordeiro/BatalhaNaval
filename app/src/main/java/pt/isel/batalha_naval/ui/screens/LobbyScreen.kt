@@ -8,20 +8,18 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.models.ButtonType
-import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.components.ButtonApp
 import pt.isel.batalha_naval.ui.components.PlayersDisplay
 
 @Composable
 fun LobbyScreen(
-    startGame: (Lobby) -> Unit,
+    /*startGame: (Lobby) -> Unit,
     removeUser: (Lobby) -> Unit,
-    leaveLobby: (Lobby) -> Unit
+    leaveLobby: (Lobby) -> Unit*/
 ) {
 
     Column(modifier = Modifier.fillMaxWidth()){

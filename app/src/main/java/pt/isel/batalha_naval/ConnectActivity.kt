@@ -1,5 +1,5 @@
 package pt.isel.batalha_naval
-
+/*
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +8,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
-import pt.isel.batalha_naval.ui.screens.ChooseRoomScreen
-import pt.isel.batalha_naval.ui.screens.IntroScreen
 import pt.isel.batalha_naval.viewmodel.ConnectViewModel
 
 class ConnectActivity : BaseActivity<ConnectViewModel>() {
@@ -69,3 +67,5 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
         super.onBackPressed()
     }
 }
+
+ */

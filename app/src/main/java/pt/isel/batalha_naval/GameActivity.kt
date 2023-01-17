@@ -1,5 +1,5 @@
 package pt.isel.batalha_naval
-
+/*
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
@@ -66,4 +66,4 @@ class GameActivity : BaseActivity<ConnectViewModel>() {
     override fun onBackPressed() {
         super.onBackPressed()
     }
-}
+}*/
