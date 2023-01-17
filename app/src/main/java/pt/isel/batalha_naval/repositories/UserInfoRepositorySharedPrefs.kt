@@ -9,7 +9,6 @@ import pt.isel.batalha_naval.domain.UserInfo
 class UserInfoRepositorySharedPrefs(private val context: Context): UserInfoRepository {
 
     private val userNickKey = "Nick"
-    private val userMotoKey = "Moto"
 
     private val prefs by lazy {
         context.getSharedPreferences("UserInfoPrefs", Context.MODE_PRIVATE)
@@ -19,7 +18,7 @@ class UserInfoRepositorySharedPrefs(private val context: Context): UserInfoRepos
         get() {
             val savedNick = prefs.getString(userNickKey, null)
             return if (savedNick != null)
-                UserInfo(savedNick, prefs.getString(userMotoKey, null))
+                UserInfo(savedNick)
             else
                 null
         }
@@ -28,12 +27,10 @@ class UserInfoRepositorySharedPrefs(private val context: Context): UserInfoRepos
             if (value == null)
                 prefs.edit()
                     .remove(userNickKey)
-                    .remove(userMotoKey)
                     .apply()
             else
                 prefs.edit()
                     .putString(userNickKey, value.nick)
-                    .putString(userMotoKey, value.moto)
                     .apply()
         }
 }

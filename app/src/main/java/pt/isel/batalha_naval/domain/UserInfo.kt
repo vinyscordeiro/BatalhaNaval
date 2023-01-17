@@ -4,11 +4,10 @@ package pt.isel.batalha_naval.domain
  * Represents the user information.
  *
  * @property [nick] the user's nick name
- * @property [moto] the user's moto, if he has one
  */
-data class UserInfo(val nick: String, val moto: String? = null) {
+data class UserInfo(val nick: String) {
     init {
-        require(validateUserInfoParts(nick, moto))
+        require(validateUserInfoParts(nick))
     }
 }
 
@@ -16,9 +15,9 @@ data class UserInfo(val nick: String, val moto: String? = null) {
  * Returns a [UserInfo] instance with the received values or null, if those
  * values are invalid.
  */
-fun userInfoOrNull(nick: String, moto: String?): UserInfo? =
-    if (validateUserInfoParts(nick, moto))
-        UserInfo(nick, moto)
+fun userInfoOrNull(nick: String): UserInfo? =
+    if (validateUserInfoParts(nick))
+        UserInfo(nick)
     else
         null
 
@@ -26,5 +25,5 @@ fun userInfoOrNull(nick: String, moto: String?): UserInfo? =
  * Checks whether the received values are acceptable as [UserInfo]
  * instance fields.
  */
-fun validateUserInfoParts(nick: String, moto: String?) =
-    nick.isNotBlank() && moto?.isNotBlank() ?: true
+fun validateUserInfoParts(nick: String) =
+    nick.isNotBlank() ?: true

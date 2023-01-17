@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     //IntroScreen()
 
                     runBlocking {
-                            app.gameService.create("teste")
+                            //
                     }
 
                 }
