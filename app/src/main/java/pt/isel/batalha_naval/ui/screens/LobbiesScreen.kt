@@ -13,12 +13,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.domain.Lobby
+import pt.isel.batalha_naval.models.LobbyModel
 import pt.isel.batalha_naval.ui.components.GameRoomDisplay
 
 @Composable
-fun ChooseRoomScreen(
-    //lobbies: List<Lobby>,
-    //joinLobby: (Lobby) -> Unit
+fun LobbiesScreen(
+    lobbies: List<LobbyModel>,
+    joinLobby: (LobbyModel) -> Unit
 ) {
 
     Column(modifier = Modifier.fillMaxWidth()){
@@ -41,17 +43,17 @@ fun ChooseRoomScreen(
             .verticalScroll(rememberScrollState())
             .padding(0.dp,0.dp,0.dp, 24.dp)) {
 
-            /*lobbies.forEach {
+            lobbies.forEach {
                 Row(Modifier.padding(0.dp, 4.dp)) {
                     GameRoomDisplay(
-                        room_id = it.gameId,
-                        player_id = it.displayName,
+                        room_id = it.lobbyId,
+                        player_id = it.lobbyId,
                         onClick = {
-                            // TODO Entra no lobby
+                            joinLobby(it)
                         }
                     )
                 }
-            }*/
+            }
 
         }
     }

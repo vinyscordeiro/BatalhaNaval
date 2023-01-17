@@ -9,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.flow.callbackFlow
 import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.domain.*
-import pt.isel.batalha_naval.models.BattleshipLobby
+import pt.isel.batalha_naval.models.LobbyModel
 import java.util.*
 
 class UnreachableLobbyException : Exception()
@@ -52,7 +52,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
         }
     }
 
-    override suspend fun getLobbies(): List<BattleshipLobby> {
+    override suspend fun getLobbies(): List<LobbyModel> {
         try {
             val result = db.collection(LOBBY).get().await()
             return result.map { it.toBattleshipLobby() }
@@ -62,7 +62,7 @@ class LobbyFirebase(private val db: FirebaseFirestore) : Lobby {
         }
     }
 
-    override suspend fun enter(localPlayer: PlayerInfo): List<BattleshipLobby> {
+    override suspend fun enter(localPlayer: PlayerInfo): List<LobbyModel> {
         check(state == Idle)
         try {
             state = InUse(localPlayer, addLocalPlayer(localPlayer))
@@ -155,7 +155,7 @@ const val CHALLENGER_ID_FIELD = "id"
  * into [PlayerInfo] instances.
  */
 fun QueryDocumentSnapshot.toBattleshipLobby() =
-    BattleshipLobby(PlayerInfo(
+    LobbyModel(PlayerInfo(
         info = UserInfo(
             nick = data[NICK_FIELD] as String
         ),

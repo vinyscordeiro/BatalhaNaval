@@ -1,7 +1,7 @@
 package pt.isel.batalha_naval.domain
 
 import kotlinx.coroutines.flow.Flow
-import pt.isel.batalha_naval.models.BattleshipLobby
+import pt.isel.batalha_naval.models.LobbyModel
 
 /**
  * Sum type used to describe events occurring while the player is in the lobby.
@@ -10,7 +10,7 @@ import pt.isel.batalha_naval.models.BattleshipLobby
  * [ChallengeReceived] when a challenge is received by the local player.
  */
 sealed class LobbyEvent
-data class RosterUpdated(val lobbies: List<BattleshipLobby>) : LobbyEvent()
+data class RosterUpdated(val lobbies: List<LobbyModel>) : LobbyEvent()
 data class ChallengeReceived(val challenge: Challenge) : LobbyEvent()
 
 /**
@@ -21,14 +21,14 @@ interface Lobby {
      * Gets the list of players currently in the lobby
      * @return the list of players currently in the lobby
      */
-    suspend fun getLobbies(): List<BattleshipLobby>
+    suspend fun getLobbies(): List<LobbyModel>
 
     /**
      * Enters the lobby. It cannot be entered again until left.
      * @return the list of players currently in the lobby
      * @throws IllegalStateException    if the lobby was already entered
      */
-    suspend fun enter(localPlayer: PlayerInfo): List<BattleshipLobby>
+    suspend fun enter(localPlayer: PlayerInfo): List<LobbyModel>
 
     /**
      * Enters the lobby and subscribes to events that occur in the lobby.
