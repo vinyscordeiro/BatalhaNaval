@@ -14,6 +14,7 @@ class GameStarted(game: Game) : GameEvent(game)
 class MoveMade(game: Game) : GameEvent(game)
 class GameEnded(game: Game, val winner: Player? = null) : GameEvent(game)
 
+
 /**
  * Abstraction that characterizes a match between two players, that is, the
  * required interactions.
@@ -48,4 +49,3 @@ interface Match {
      */
     suspend fun end()
 }
-

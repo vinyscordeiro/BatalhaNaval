@@ -23,11 +23,15 @@ class AppNavigationService (): NavigationService {
         //navigateTo<ConnectActivity>(ctx)
     }
 
-    override fun navigateToRooms(ctx: Context) {
+    override fun navigateToLobbies(ctx: Context) {
         TODO("Not yet implemented")
     }
 
     override fun navigateToLobby(ctx: Context) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToFavorites(ctx: Context) {
         TODO("Not yet implemented")
     }
 

@@ -8,14 +8,14 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
+import pt.isel.batalha_naval.ui.screens.IntroMenuScreen
 import pt.isel.batalha_naval.viewmodel.ConnectViewModel
 
 class ConnectActivity : BaseActivity<ConnectViewModel>() {
     override val viewModel: ConnectViewModel by viewModels{
         viewModelInit {
             ConnectViewModel(
-                dependencyContainer.gameService,
-                dependencyContainer.userRepository
+                
             )
         }
     }
@@ -25,7 +25,7 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
 
         safeSetContent {
 
-            LaunchedEffect(viewModel.gameId) {
+            LaunchedEffect(viewModel.) {
                 if (viewModel.gameId != null)
                     // should not be possible a null navigation service
                     navigationService?.navigateToGame(this@ConnectActivity, viewModel.gameId!!)
@@ -42,11 +42,11 @@ class ConnectActivity : BaseActivity<ConnectViewModel>() {
                     // se está num jogo verificar se precisa posicionar ou está posicionado
                     // Se está posicionado verificar se jogo continua ou acabou
 
-                    if (viewModel.currentLobby == null)
-
-                    else {
-                        // TODO Se está num lobby
-
+                    IntroMenuScreen(
+                        userName = ,
+                        createLobby = { /*TODO*/ },
+                        getLobbies = { /*TODO*/ }) {
+                        
                     }
 
                 }
