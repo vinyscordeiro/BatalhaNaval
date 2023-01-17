@@ -39,7 +39,7 @@ fun getLocalPlayer(localPlayer: PlayerInfo, challenge: Challenge) =
 
 /**
  * Gets the game current result
- * Returns null if the game hasnt had a decisive result
+ * Returns null if the game hasn't had a decisive result
  * Returns Player1 if the Player1 as won
  * Returns Player2 if the Player2 as won
  */

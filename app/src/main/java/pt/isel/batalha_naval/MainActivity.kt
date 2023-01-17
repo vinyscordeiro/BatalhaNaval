@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.FirebaseApp
-import kotlinx.coroutines.*
 import pt.isel.batalha_naval.helpers.viewModelInit
 import pt.isel.batalha_naval.ui.screens.InitialScreen
 import pt.isel.batalha_naval.ui.theme.BatalhaNavalTheme
@@ -50,11 +49,6 @@ class MainActivity : BaseActivity<SettingsViewModel>() {
                             // TODO NAVIGATE TO INTRO MENU SCREEN
                         }
                     )
-
-                    runBlocking {
-                   // Aqui está a dar erro isso. E suposto isso estar aqui?
-                    //         app.gameService.create("teste")
-                    }
 
                 }
             }
