@@ -6,19 +6,15 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pt.isel.batalha_naval.domain.Lobby
-import pt.isel.batalha_naval.domain.UserInfoRepository
-import pt.isel.batalha_naval.domain.UserInfoRepositorySharedPrefs
-import pt.isel.batalha_naval.repositories.UserRepository
-import pt.isel.batalha_naval.services.AppNavigationService
-import pt.isel.batalha_naval.services.LobbyFirebase
-import pt.isel.batalha_naval.services.NavigationService
-import pt.isel.batalha_naval.services.RemoteGameService
+import pt.isel.batalha_naval.domain.Match
+import pt.isel.batalha_naval.repositories.UserInfoRepository
+import pt.isel.batalha_naval.repositories.UserInfoRepositorySharedPrefs
+import pt.isel.batalha_naval.services.*
 
 interface DependencyContainer{
     val navigationService: NavigationService?
     val userInfoRepo: UserInfoRepository
-    val gameService: RemoteGameService
-    val userRepository: UserRepository
+    val match: Match
     val lobby: Lobby
 }
 
@@ -49,10 +45,8 @@ class BatalhaNavalApplication() : Application(), DependencyContainer{
 
     override val userInfoRepo: UserInfoRepository
         get() = UserInfoRepositorySharedPrefs(this)
-    override val gameService: RemoteGameService
-        get() = TODO("Not yet implemented")
-    override val userRepository: UserRepository
-        get() = TODO("Not yet implemented")
+    override val match: Match
+        get() = MatchFirebase(emulatedFirestoreDb)
 
     override val lobby: Lobby
         get() = LobbyFirebase(emulatedFirestoreDb)

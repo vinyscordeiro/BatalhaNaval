@@ -1,6 +1,7 @@
-package pt.isel.batalha_naval.domain
+package pt.isel.batalha_naval.repositories
 
 import android.content.Context
+import pt.isel.batalha_naval.domain.UserInfo
 
 /**
  * A user information repository implementation supported in shared preferences

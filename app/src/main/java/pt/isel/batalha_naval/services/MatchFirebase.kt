@@ -64,7 +64,8 @@ class MatchFirebase(private val db: FirebaseFirestore) : Match {
         return callbackFlow {
             val newGame = Game(
                 playerTurn = getLocalPlayer(localPlayer, challenge),
-                boardPlayer1 = Board()
+                boardPlayer1 = Board(),     //TODO RECEBER BOARD DE CIMA
+                boardPlayer2 = Board()      //TODO RECEBER BOARD DE CIMA
             )
             val gameId = challenge.challenger.id.toString()
 
@@ -131,7 +132,7 @@ const val FORFEIT_FIELD = "forfeit"
  * pairs containing the object's properties
  */
 fun Game.toDocumentContent() = mapOf(
-    TURN_FIELD to boardPlayer1.turn.name,
+    TURN_FIELD to playerTurn,
     //TODO ()
     BOARD_FIELD to null
 

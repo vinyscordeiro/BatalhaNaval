@@ -34,16 +34,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    IntroScreen()
+                    //IntroScreen()
 
                     runBlocking {
-                            app.lobby.enter( PlayerInfo(
-                                info = UserInfo(
-                                    nick = "teste",
-                                    moto = "teste"
-                                )
-
-                            ))
+                            app.gameService.create("teste")
                     }
 
                 }

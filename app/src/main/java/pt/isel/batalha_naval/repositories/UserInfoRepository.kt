@@ -1,4 +1,4 @@
-package pt.isel.batalha_naval.domain
+package pt.isel.batalha_naval.repositories
 
 import pt.isel.batalha_naval.domain.UserInfo
 

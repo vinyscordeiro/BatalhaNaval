@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Job
 import pt.isel.batalha_naval.models.Lobby
-import pt.isel.batalha_naval.repositories.UserRepository
 import pt.isel.batalha_naval.services.RemoteGameService
 
 class ConnectViewModel (
@@ -24,7 +23,7 @@ class ConnectViewModel (
 
         fun loadLobbies() {
                 safeViewModelScopeLaunch {
-                        lobbies = remoteGameService.getLobbies()
+                        lobbies = remoteGameService.getPlayersInLobby()
                 }
         }
 
