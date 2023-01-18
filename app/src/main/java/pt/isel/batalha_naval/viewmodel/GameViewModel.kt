@@ -1,5 +1,5 @@
-/*package pt.isel.batalha_naval.viewmodel
-
+package pt.isel.batalha_naval.viewmodel
+/*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -78,11 +78,17 @@ private fun handleGameEnding() {
     if (gameState == GameState.ONGOING) {
         playerWon = true
         gameState = GameState.ENDED
-        _gameHistory.wins++
     }
 }
+    private fun addToFavorite() {
 
-/*
+        if (gameState == GameState.ENDED) {
+            playerWon = true
+            gameState = GameState.ENDED
+        }
+    }
+
+
 private fun getUserFavCellState(): CellState {
     val userData = userRepository.getUserData()
     if (userData?.favPlay == AppConstants.X)
@@ -141,5 +147,6 @@ private fun changePlayer() {
     _currPlayer = if (_currPlayer == CellState.O) CellState.X else CellState.O
 }
 
-*/
+
 }*/
+

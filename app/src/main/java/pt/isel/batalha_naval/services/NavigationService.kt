@@ -5,7 +5,6 @@ import android.content.Context
 interface NavigationService {
     fun navigateToMenu(ctx: Context)
     fun navigateToLobbies(ctx: Context)
-    fun navigateToLobby(ctx: Context)
     fun navigateToFavorites(ctx: Context)
     fun navigateToGame(ctx: Context, gameId: String)
 }

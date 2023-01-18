@@ -24,6 +24,7 @@ class MenuViewModel (
 
         private var _waitingJob: Job? = null
 
+
         fun loadLobbies() {
                 safeViewModelScopeLaunch {
                        lobbies = lobbyService.getLobbies()
@@ -33,6 +34,8 @@ class MenuViewModel (
         fun createLobby() {
                _waitingJob = safeViewModelScopeLaunch {
                        //lobbyService.enterAndObserve()
+                       // ATTENTION ONLY FOR TEST, TODO ERASE IT
+                       currentLobby = LobbyModel(PlayerInfo(UserInfo("vini")),1234)
                }
         }
 
@@ -55,6 +58,7 @@ class MenuViewModel (
                         _waitingJob = null
                         remoteGameService.remove(lobby)
                 }*/
+                currentLobby = null
 
         }
 }

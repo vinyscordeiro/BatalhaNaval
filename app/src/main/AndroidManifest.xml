@@ -32,9 +32,18 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".LobbiesActivity"
+            android:exported="false"
+            android:label="@string/title_lobbies_activity"
+            android:theme="@style/Theme.BatalhaNaval">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".FavoritesActivity"
             android:exported="false"
-            android:label="@string/title_favorites_activity"
+            android:label="@string/title_menu_activity"
             android:theme="@style/Theme.BatalhaNaval">
             <meta-data
                 android:name="android.app.lib_name"
