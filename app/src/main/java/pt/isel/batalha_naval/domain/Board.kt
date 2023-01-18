@@ -99,3 +99,19 @@ fun Board.getResult(): BoardResult =
         hasEnded(Player.PLAYER2) -> HasWinner(Player.PLAYER1)
         else -> OnGoing()
     }
+
+
+fun Board.CalculateNumberOfMoves() : Int{
+    var count = 0
+    for (index in 0..BOARD_SIDE) {
+        for (index2 in 0..BOARD_SIDE) {
+            val square = this[Coordinate(index, index2)]
+            if (square != null && square.shot) {
+                count++
+            }
+        }
+
+    }
+
+    return count
+}

@@ -11,17 +11,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
-import pt.isel.batalha_naval.domain.Lobby
-import pt.isel.batalha_naval.domain.PlayerInfo
-import pt.isel.batalha_naval.domain.UserInfo
 import pt.isel.batalha_naval.models.ButtonType
-import pt.isel.batalha_naval.models.LobbyModel
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.components.ButtonApp
 import pt.isel.batalha_naval.ui.components.PlayersDisplay
 
 @Composable
 fun LobbyScreen(
-    lobby: LobbyModel,
+    lobby: Lobby,
     leaveLobby: () -> Unit
 ) {
 
@@ -43,7 +40,7 @@ fun LobbyScreen(
         Row(
             modifier = Modifier.padding(0.dp, 4.dp, 0.dp, 30.dp).align(CenterHorizontally)
         ) {
-            PlayersDisplay(player_1 = lobby.playerInfo.info.nick, player_2 = "Aguardando...")
+            PlayersDisplay(player_1 = lobby.playerId, player_2 = "Aguardando...")
         }
 
         Column(modifier = Modifier

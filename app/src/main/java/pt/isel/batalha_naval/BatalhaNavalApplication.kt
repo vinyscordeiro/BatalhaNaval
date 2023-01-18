@@ -14,8 +14,10 @@ import pt.isel.batalha_naval.services.*
 interface DependencyContainer{
     val navigationService: NavigationService?
     val userInfoRepo: UserInfoRepository
-    val match: Match
-    val lobby: Lobby
+    val gameService: RemoteGameService
+    //val match: Match
+    //val lobby: Lobby
+
 }
 
 class BatalhaNavalApplication() : Application(), DependencyContainer{
@@ -45,10 +47,15 @@ class BatalhaNavalApplication() : Application(), DependencyContainer{
 
     override val userInfoRepo: UserInfoRepository
         get() = UserInfoRepositorySharedPrefs(this)
-    override val match: Match
-        get() = MatchFirebase(emulatedFirestoreDb)
 
-    override val lobby: Lobby
-        get() = LobbyFirebase(emulatedFirestoreDb)
+    override val gameService: RemoteGameService by lazy {
+        FirestoreRemoteGameService(this)
+    }
+
+//    override val match: Match
+//        get() = MatchFirebase(emulatedFirestoreDb)
+//
+//    override val lobby: Lobby
+//        get() = LobbyFirebase(emulatedFirestoreDb)
 
 }

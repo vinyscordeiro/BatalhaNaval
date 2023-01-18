@@ -17,7 +17,7 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
     override val viewModel: MenuViewModel by viewModels {
         viewModelInit {
             MenuViewModel(
-                dependencyContainer.lobby,
+                dependencyContainer.gameService,
                 dependencyContainer.userInfoRepo
             )
         }
@@ -41,7 +41,7 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
                                 }
                             )
                         } else {
-                            LobbiesScreen(lobbies = viewModel.lobbies, joinLobby = {viewModel.joinLobby(it)})
+                            LobbiesScreen(lobbies = viewModel.lobbies, joinLobby = { viewModel.joinLobby(it) })
                         }
                     } else {
                         IntroMenuScreen(

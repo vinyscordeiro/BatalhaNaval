@@ -4,19 +4,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Job
-import pt.isel.batalha_naval.domain.Lobby
-import pt.isel.batalha_naval.domain.PlayerInfo
-import pt.isel.batalha_naval.domain.UserInfo
-import pt.isel.batalha_naval.models.LobbyModel
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.repositories.UserInfoRepository
+import pt.isel.batalha_naval.services.FirestoreRemoteGameService
+import pt.isel.batalha_naval.services.RemoteGameService
 
 class MenuViewModel (
-        private val lobbyService: Lobby,
+        private val remoteGameService: RemoteGameService,
         private val userRepository: UserInfoRepository
         ): ViewModelBase () {
 
-        var lobbies by mutableStateOf<List<LobbyModel>>(emptyList())
-        var currentLobby by mutableStateOf<LobbyModel?>(null)
+        var lobbies by mutableStateOf<List<Lobby>>(emptyList())
+        var currentLobby by mutableStateOf<Lobby?>(null)
         var gameId by mutableStateOf<String?>(null)
 
         val isJoiningOrWaitingForPlayer: Boolean
@@ -27,7 +26,7 @@ class MenuViewModel (
 
         fun loadLobbies() {
                 safeViewModelScopeLaunch {
-                       lobbies = lobbyService.getLobbies()
+                       lobbies = remoteGameService.getLobbies()
                 }
         }
 
@@ -39,13 +38,13 @@ class MenuViewModel (
                }
         }
 
-        fun joinLobby(lobbyModel: LobbyModel) : LobbyModel {
+        fun joinLobby(lobby: Lobby) : Lobby {
 
                 _waitingJob = safeViewModelScopeLaunch {
                         //currentLobby = lobby.enter()
                         //gameId = remoteGameService.join(lobby, userRepository.getUserData()!!.userName)
                 }
-                return LobbyModel(playerInfo = PlayerInfo(UserInfo("123")),123L)
+                return FirestoreRemoteGameService.FirestoreRemoteLobby(null, lobby.playerId, lobby.lobbyId)
         }
 
         fun leaveLobby() {

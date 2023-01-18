@@ -13,14 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
-import pt.isel.batalha_naval.domain.Lobby
-import pt.isel.batalha_naval.models.LobbyModel
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.components.GameRoomDisplay
 
 @Composable
 fun LobbiesScreen(
-    lobbies: List<LobbyModel>,
-    joinLobby: (LobbyModel) -> Unit
+    lobbies: List<Lobby>,
+    joinLobby: (Lobby) -> Unit
 ) {
 
     Column(modifier = Modifier.fillMaxWidth()){
@@ -46,8 +45,8 @@ fun LobbiesScreen(
             lobbies.forEach {
                 Row(Modifier.padding(0.dp, 4.dp)) {
                     GameRoomDisplay(
-                        room_id = it.lobbyId.toString(),
-                        player_id = it.lobbyId.toString(),
+                        room_id = it.lobbyId,
+                        player_id = it.playerId,
                         onClick = {
                             joinLobby(it)
                         }
