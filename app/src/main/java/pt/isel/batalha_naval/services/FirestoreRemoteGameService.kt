@@ -203,17 +203,13 @@ class FirestoreRemoteGameService(
     }
 
 
-    override suspend fun play(game: RemoteGame, moveIdx: Int) {
+    override suspend fun play(game: RemoteGame, coordenate: Coordinate) {
         val g = game as FirestoreRemoteGame
 
         if (!g.isMyTurn)
             return
 
-        //TODO ADD LOGIC
-        //        val arr = g.board.toCharArray()
-        //        arr[moveIdx] = g.playerKey
-        //        g.board = String(arr)
-
+        g.enemyBoard?.get(coordenate)?.shot = true
         g.isMyTurn = false
 
         try {
