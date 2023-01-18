@@ -33,22 +33,17 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
                     color= MaterialTheme.colors.background
                 ) {
                     if (viewModel.currentLobby != null) {
-                        if (viewModel.lobbies.isEmpty()){
-                            LobbyScreen(
-                                lobby = viewModel.currentLobby!!,
-                                leaveLobby = {
-                                    viewModel.leaveLobby()
-                                }
-                            )
-                        } else {
-                            LobbiesScreen(lobbies = viewModel.lobbies, joinLobby = { viewModel.joinLobby(it) })
-                        }
+                        LobbyScreen(
+                            lobby = viewModel.currentLobby!!,
+                            leaveLobby = {
+                                viewModel.leaveLobby()
+                            }
+                        )
                     } else {
                         IntroMenuScreen(
                             createLobby = { viewModel.createLobby() },
                             getLobbies = { navigationService?.navigateToLobbies(this)},
                             getFavorites = { navigationService?.navigateToFavorites(this)}
-                        // Might be an error the possibility of being null
                         )
                     }
                 }
@@ -69,9 +64,6 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
     override fun onBackPressed() {
         if(!viewModel.isJoiningOrWaitingForPlayer) {
             super.onBackPressed()
-            if(viewModel.lobbies.isNotEmpty()) {
-                viewModel.lobbies = emptyList()
-            }
         } else {
             viewModel.leaveLobby()
         }

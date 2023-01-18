@@ -19,7 +19,6 @@ class SettingsViewModel(
     fun loadUserData()
     {
         val userInfo = userRepo.getUserInfo() ?: return
-
         username = userInfo.nick
 
     }

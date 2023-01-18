@@ -6,5 +6,6 @@
     <string name="title_menu_activity">MenuActivity</string>
     <string name="title_lobbies_activity">LobbiesActivity</string>
     <string name="title_favorites_activity">MenuActivity</string>
+    <string name="title_game_activity">GameActivity</string>
     <string name="title_initial_activity">Initial</string>
 </resources>

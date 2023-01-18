@@ -1,7 +1,6 @@
 package pt.isel.batalha_naval.services
 
 import pt.isel.batalha_naval.models.Lobby
-import pt.isel.batalha_naval.models.LobbyModel
 import pt.isel.batalha_naval.models.RemoteGame
 
 interface RemoteGameService {

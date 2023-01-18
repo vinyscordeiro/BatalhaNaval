@@ -10,13 +10,14 @@ import pt.isel.batalha_naval.models.GameState
 import pt.isel.batalha_naval.models.PlayedGame
 import pt.isel.batalha_naval.models.RemoteGame
 import pt.isel.batalha_naval.repositories.PlayedGamesRepository
+import pt.isel.batalha_naval.repositories.UserInfoRepository
 import pt.isel.batalha_naval.repositories.UserRepository
 import pt.isel.batalha_naval.services.GameEndedException
 import pt.isel.batalha_naval.services.RemoteGameService
 
 class GameViewModel(
     private val gameService: RemoteGameService,
-    private val userRepository: UserRepository,
+    private val userRepository: UserInfoRepository,
     private val playedGamesRepository: PlayedGamesRepository
 ) : ViewModelBase() {
 
@@ -28,7 +29,6 @@ class GameViewModel(
     var gameState: GameState by mutableStateOf(GameState.INVALID)
     var canPlay by mutableStateOf(false)
     var playerWon = false
-
 
     private var _plays = 0
     private var _list = mutableStateListOf<Square>()
@@ -149,4 +149,3 @@ private fun changePlayer() {
 
 
 }*/
-

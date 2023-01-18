@@ -7,7 +7,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
-import pt.isel.batalha_naval.models.LobbyModel
+import pt.isel.batalha_naval.models.Lobby
 import pt.isel.batalha_naval.ui.screens.LobbiesScreen
 import pt.isel.batalha_naval.viewmodel.LobbiesViewModel
 
@@ -16,7 +16,7 @@ class LobbiesActivity : BaseActivity<LobbiesViewModel>() {
     override val viewModel: LobbiesViewModel by viewModels {
         viewModelInit {
             LobbiesViewModel (
-                dependencyContainer.lobby,
+                dependencyContainer.gameService,
                 dependencyContainer.userInfoRepo
             )
         }
@@ -37,7 +37,7 @@ class LobbiesActivity : BaseActivity<LobbiesViewModel>() {
         }
     }
 
-    fun joinLobby(lobby: LobbyModel){
+    fun joinLobby(lobby: Lobby){
         viewModel.joinLobby(lobby)
         navigationService?.navigateToGame(this, "teste")
     }
