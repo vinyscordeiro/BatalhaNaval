@@ -1,5 +1,6 @@
 package pt.isel.batalha_naval.services
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import pt.isel.batalha_naval.FavoritesActivity
@@ -7,6 +8,10 @@ import pt.isel.batalha_naval.LobbiesActivity
 import pt.isel.batalha_naval.MenuActivity
 
 class AppNavigationService (): NavigationService {
+
+    companion object {
+        const val GAME_EXTRA = "GAME_EXTRA"
+    }
 
     private inline fun <reified T> navigateTo(
         context: Context,
@@ -38,4 +43,7 @@ class AppNavigationService (): NavigationService {
         TODO("Not yet implemented")
     }
 
+    override fun getGameIdExtra(ctx: Activity): String? {
+        return ctx.intent.getStringExtra(GAME_EXTRA)
+    }
 }

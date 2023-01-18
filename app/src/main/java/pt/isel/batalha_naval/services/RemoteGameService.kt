@@ -19,5 +19,4 @@ interface RemoteGameService {
     suspend fun onOtherPlayerStateChanged(): RemoteGame
 }
 
-
 class GameEndedException(message: String) : Exception(message)

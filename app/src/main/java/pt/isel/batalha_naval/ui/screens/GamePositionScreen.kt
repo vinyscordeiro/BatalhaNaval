@@ -13,26 +13,41 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.domain.BOARD_SIDE
+import pt.isel.batalha_naval.domain.Square
+import pt.isel.batalha_naval.models.Boat
+import pt.isel.batalha_naval.models.BoatCoordinates
+import pt.isel.batalha_naval.models.BoatType
+import pt.isel.batalha_naval.models.Position
 import pt.isel.batalha_naval.ui.components.ButtonApp
+import pt.isel.batalha_naval.ui.components.GameBoard
+import pt.isel.batalha_naval.ui.components.GameBoardPosition
 import pt.isel.batalha_naval.ui.components.GamePositionBoard
 
 @Composable
-@Preview
-fun GamePositionScreen() {
-    var isSelected = false;
-    var ships_available = 10;
+fun GamePositionScreen(
+    username: String
+) {
+    var selectedBoat : Boat? = null
+    var boats : List<Boat> = loadBoats()
+    var shipsAvailable = 10
 
-    Column(modifier = Modifier.fillMaxWidth()){
+    val localPositionTiles : List<List<Square>> = List(
+        size = BOARD_SIDE,
+        init = { List(size = BOARD_SIDE, init = { Square(false, null) }) }
+    )
+
+    Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
                 .align(CenterHorizontally)
-                .padding(0.dp, 20.dp, 0.dp, 0.dp),
+                .padding(0.dp, 20.dp, 0.dp, 0.dp)
         ) {
             Image(painter = painterResource(R.drawable.logo), modifier = Modifier
                 .width(150.dp)
                 .height(120.dp), contentDescription = "Batalha Naval Logo")
 
-            Text(text = "Vinicius Cordeiro",
+            Text(text = username,
                 modifier = Modifier
                     .align(CenterVertically)
                     .padding(14.dp, 0.dp, 0.dp, 0.dp)
@@ -51,10 +66,14 @@ fun GamePositionScreen() {
             .align(CenterHorizontally)
             .padding(0.dp, 16.dp, 0.dp, 0.dp)) {
 
-            if(isSelected) {
+            if(selectedBoat != null) {
                 Row(modifier = Modifier.align(CenterHorizontally)) {
-                    // TODO Make Gameboard only
-                    // GameBoard()
+                    GameBoardPosition(
+                        tiles = localPositionTiles,
+                        onClickCell = {
+
+                        }
+                    )
                 }
             } else {
                 Row(modifier = Modifier.align(CenterHorizontally)) {
@@ -64,14 +83,21 @@ fun GamePositionScreen() {
                     )
                 }
                 Row(modifier = Modifier.align(CenterHorizontally)) {
-                    GamePositionBoard()
+                    GamePositionBoard(
+                        boats= boats,
+                        onSelect = {
+                            selectedBoat = it.copy()
+                        }
+                    )
                 }
             }
 
-            Row(modifier = Modifier.align(CenterHorizontally).padding(0.dp,24.dp,0.dp,0.dp)) {
+            Row(modifier = Modifier
+                .align(CenterHorizontally)
+                .padding(0.dp, 24.dp, 0.dp, 0.dp)) {
                 ButtonApp(
                     text = "Avançar",
-                    disabled = isFinished(ships_available)
+                    disabled = isFinished(shipsAvailable)
                 )
             }
         }
@@ -81,3 +107,33 @@ fun GamePositionScreen() {
 fun isFinished(ships_available: Int): Boolean {
     return ships_available > 0
 }
+
+@Composable
+@Preview
+fun gamePositionScreenTest() {
+    GamePositionScreen(username = "vinicius")
+}
+
+fun loadBoats(): List<Boat> {
+    return listOf(
+        Boat(id = 1, name= BoatType.CRUISERS, size = 4),
+        Boat(id = 2, name= BoatType.DESTROYERS, size = 3),
+        Boat(id = 3, name= BoatType.DESTROYERS, size = 3),
+        Boat(id = 4, name= BoatType.CORVETTES, size = 2),
+        Boat(id = 5, name= BoatType.CORVETTES, size = 2),
+        Boat(id = 6,name= BoatType.CORVETTES, size = 2),
+        Boat(id = 7,name= BoatType.SUBMARINES, size = 1),
+        Boat(id = 8,name= BoatType.SUBMARINES, size = 1),
+        Boat(id = 9,name= BoatType.SUBMARINES, size = 1),
+        Boat(id = 10,name= BoatType.SUBMARINES, size = 1)
+    )
+}
+
+fun positionSelectedBoat(selectedBoat: Boat, boats: List<Boat>, positionRow: Int, positionColumn: Int, position: Position){
+
+}
+
+/*
+fun positionSelectedBoat(coordinates: BoatCoordinates, selectedBoat: Boat) {
+    selectedBoat.position = coordinates
+}*/

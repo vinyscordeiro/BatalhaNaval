@@ -7,13 +7,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import pt.isel.batalha_naval.domain.BOARD_SIDE
 import pt.isel.batalha_naval.domain.Square
+import pt.isel.batalha_naval.models.Boat
+import pt.isel.batalha_naval.models.BoatCoordinates
 import pt.isel.batalha_naval.models.GameCellType
+import pt.isel.batalha_naval.models.Position
 
 @Composable
-fun GameBoard(
+fun GameBoardPosition(
     tiles : List<List<Square>>,
-    onClickCell: (() -> Unit)? = null
+    selectedBoat: Boat?,
+    boats: List<Boat>,
+    shipsAvaiable: Int,
+    onClickCell: (Int, Int, Position) -> BoatCoordinates
 ) {
+
+        var position: Position = Position.HORIZONTAL
+
     Column() {
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             GameSelection(title = " ")
@@ -36,7 +45,9 @@ fun GameBoard(
             for( i in 0 until BOARD_SIDE){
                 GameCellGame(
                     square = firstRow.get(i),
-                    onClick = {  }
+                    onClick = {
+                        onClickCell(0,i,position)
+                    }
                 )
             }
 
@@ -127,7 +138,7 @@ fun GameBoard(
 }
 
 @Composable
-fun getGameCell(square: Square?) {
+fun getGameCell2(square: Square?) {
     if (square != null){
         if(square.shot){
             if(square.boat != null) {
@@ -141,11 +152,18 @@ fun getGameCell(square: Square?) {
 
 @Composable
 @Preview
-fun gameboardPrevier() {
+fun gameboardPrevier2() {
     GameBoard(
         List(
             size = BOARD_SIDE,
             init = { List(size = BOARD_SIDE, init = { Square(true, null) }) }
         )
     )
+}
+
+fun chooseCoordinate(selectedBoat: Boat, boats: List<Boat>, shipsAvaiable: Int, positionRow: Int, positionColumn: Int, position: Position){
+    selectedBoat!!.coordinates = BoatCoordinates(positionRow, positionColumn, position);
+    var boatIndex = boats.indexOf(selectedBoat)
+    boats[boatIndex].coordinates = selectedBoat?.coordinates
+
 }

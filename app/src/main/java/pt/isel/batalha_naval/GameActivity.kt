@@ -1,21 +1,23 @@
 package pt.isel.batalha_naval
-/*
+
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
-import pt.isel.batalha_naval.viewmodel.ConnectViewModel
+import pt.isel.batalha_naval.models.GameState
+import pt.isel.batalha_naval.ui.screens.GameAttackScreen
+import pt.isel.batalha_naval.ui.screens.GamePositionScreen
+import pt.isel.batalha_naval.ui.screens.LoadingScreen
+import pt.isel.batalha_naval.viewmodel.GameViewModel
 
-class GameActivity : BaseActivity<ConnectViewModel>() {
-    override val viewModel: ConnectViewModel by viewModels{
+class GameActivity : BaseActivity<GameViewModel>() {
+    override val viewModel: GameViewModel by viewModels{
         viewModelInit {
-            ConnectViewModel(
-                dependencyContainer.gameService,
-                dependencyContainer.userRepository
+            GameViewModel(
+                dependencyContainer.userInfoRepo
             )
         }
     }
@@ -25,29 +27,35 @@ class GameActivity : BaseActivity<ConnectViewModel>() {
 
         safeSetContent {
 
-            LaunchedEffect(viewModel.gameId) {
-                if (viewModel.gameId != null)
-                    // should not be possible a null navigation service
-                    navigationService?.navigateToGame(this@GameActivity, viewModel.gameId!!)
-
-            }
+            viewModel.startGame(navigationService?.getGameIdExtra(this)!!)
 
             BattleShipTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color= MaterialTheme.colors.background
                 ) {
-                    //  Se não está num lobby nem em jogo vai para tela inicial
+                    // Se não está num lobby nem em jogo vai para tela inicial
                     // Se está num lobby pode voltar ou iniciar um jogo
                     // se está num jogo verificar se precisa posicionar ou está posicionado
                     // Se está posicionado verificar se jogo continua ou acabou
 
-                    if (viewModel.currentLobby == null)
+                    when(viewModel.gameState){
+                        GameState.POSITION -> {
+                            GamePositionScreen(
+                                username = viewModel.usernamePlayer
+                            )
+                        }
+                        GameState.ONGOING -> {
+                            GameAttackScreen()
+                        }
+                        GameState.ENDED -> {
 
-                    else {
-                        // TODO Se está num lobby
-
+                        }
+                        else -> {
+                            LoadingScreen()
+                        }
                     }
+
 
                 }
             }
@@ -66,4 +74,4 @@ class GameActivity : BaseActivity<ConnectViewModel>() {
     override fun onBackPressed() {
         super.onBackPressed()
     }
-}*/
+}
