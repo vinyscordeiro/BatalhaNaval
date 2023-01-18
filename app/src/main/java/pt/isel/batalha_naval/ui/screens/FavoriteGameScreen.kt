@@ -16,14 +16,13 @@ import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
 import pt.isel.batalha_naval.domain.BOARD_SIDE
 import pt.isel.batalha_naval.domain.Square
+import pt.isel.batalha_naval.models.GameModel
 import pt.isel.batalha_naval.ui.components.*
 
 @Composable
-@Preview
 fun FavoriteGameScreen(
+    game: GameModel
 ) {
-
-    val gameId= 1234
 
     Column(modifier = Modifier.fillMaxWidth()){
         Row(
@@ -35,7 +34,7 @@ fun FavoriteGameScreen(
                 .width(150.dp)
                 .height(120.dp), contentDescription = "Batalha Naval Logo")
 
-            Text(text = "#$gameId",
+            Text(text = "#${game.gameId}",
                 modifier = Modifier
                     .align(CenterVertically)
                     .padding(14.dp, 0.dp, 0.dp, 0.dp)

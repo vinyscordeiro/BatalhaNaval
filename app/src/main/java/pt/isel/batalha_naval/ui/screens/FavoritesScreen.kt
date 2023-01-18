@@ -15,13 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pt.isel.batalha_naval.R
+import pt.isel.batalha_naval.models.FavoriteModel
 import pt.isel.batalha_naval.ui.components.FavoriteItem
 import pt.isel.batalha_naval.ui.components.GameRoomDisplay
 import java.util.*
 
 @Composable
-@Preview
-fun FavoritesScreen() {
+fun FavoritesScreen(
+    favorites: List<FavoriteModel>
+) {
 
     Column(modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(R.drawable.logo), modifier = Modifier
@@ -41,29 +43,23 @@ fun FavoritesScreen() {
         Column(modifier = Modifier
             .align(CenterHorizontally)
             .verticalScroll(rememberScrollState())
-            .padding(0.dp,0.dp,0.dp, 24.dp)
+            .padding(0.dp, 0.dp, 0.dp, 24.dp)
         ) {
 
-            Row(Modifier.padding(0.dp, 4.dp)) {
-                FavoriteItem(
-                    game_id = "138421",
-                    versus_player ="vinicius",
-                    date = Date()
-                )
-            }
-            Row(Modifier.padding(0.dp, 5.dp)) {
-                FavoriteItem(
-                    game_id = "138421",
-                    versus_player ="hugo",
-                    date = Date()
-                )
-            }
-            Row(Modifier.padding(0.dp, 5.dp)) {
-                FavoriteItem(
-                    game_id = "138421",
-                    versus_player ="diogo",
-                    date = Date()
-                )
+            if(favorites.isEmpty()) {
+                Text(
+                    modifier = Modifier.padding(0.dp, 10.dp),
+                    text = "Ainda não tens jogos favoritos")
+            } else{
+                for(favorite in favorites) {
+                    Row(Modifier.padding(0.dp, 4.dp)) {
+                        FavoriteItem(
+                            game_id = favorite.gameId,
+                            versus_player = favorite.opponentUsername,
+                            date = favorite.date
+                        )
+                    }
+                }
             }
         }
     }

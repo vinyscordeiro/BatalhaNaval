@@ -8,6 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import pt.isel.batalha_naval.helpers.viewModelInit
 import pt.isel.batalha_naval.ui.screens.IntroMenuScreen
+import pt.isel.batalha_naval.ui.screens.LobbiesScreen
 import pt.isel.batalha_naval.ui.screens.LobbyScreen
 import pt.isel.batalha_naval.viewmodel.MenuViewModel
 
@@ -31,14 +32,17 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
                     modifier = Modifier.fillMaxSize(),
                     color= MaterialTheme.colors.background
                 ) {
-
                     if (viewModel.currentLobby != null) {
-                        LobbyScreen(
-                            lobby = viewModel.currentLobby!!,
-                            leaveLobby = {
-                                viewModel.leaveLobby()
-                            }
-                        )
+                        if (viewModel.lobbies.isEmpty()){
+                            LobbyScreen(
+                                lobby = viewModel.currentLobby!!,
+                                leaveLobby = {
+                                    viewModel.leaveLobby()
+                                }
+                            )
+                        } else {
+                            LobbiesScreen(lobbies = viewModel.lobbies, joinLobby = {viewModel.joinLobby(it)})
+                        }
                     } else {
                         IntroMenuScreen(
                             createLobby = { viewModel.createLobby() },
@@ -50,25 +54,27 @@ class MenuActivity : BaseActivity<MenuViewModel>() {
                 }
             }
         }
-
     }
 
     override fun onPause(){
         super.onPause()
+        viewModel.leaveLobby()
     }
 
     override fun onResume(){
         super.onResume()
+        viewModel.leaveLobby()
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    fun createLobby() {
-        //TODO Fazer com que retorne o lobby id e com ele navegamos até a activity de lobby
-        viewModel.createLobby()
-        navigationService?.navigateToLobby(this)
+        if(!viewModel.isJoiningOrWaitingForPlayer) {
+            super.onBackPressed()
+            if(viewModel.lobbies.isNotEmpty()) {
+                viewModel.lobbies = emptyList()
+            }
+        } else {
+            viewModel.leaveLobby()
+        }
     }
 }
 
