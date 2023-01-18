@@ -28,21 +28,9 @@ class MainActivity : BaseActivity<SettingsViewModel>() {
         }
     }
 
-    val app by lazy {
-        (application as DependencyContainer)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
-
-        runBlocking {
-            //TESTES
-            dependencyContainer.lobby.enter(PlayerInfo(UserInfo("teste")))
-            dependencyContainer.lobby.enterAndObserve(PlayerInfo(UserInfo("teste3")))
-            dependencyContainer.lobby.issueChallenge(PlayerInfo(UserInfo("teste2")))
-        }
-
 
         setContent {
             BatalhaNavalTheme {

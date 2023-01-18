@@ -7,6 +7,7 @@ import kotlinx.coroutines.Job
 import pt.isel.batalha_naval.domain.Lobby
 import pt.isel.batalha_naval.models.LobbyModel
 import pt.isel.batalha_naval.repositories.UserInfoRepository
+import pt.isel.batalha_naval.services.LobbyFirebase
 
 class MenuViewModel (
         private val lobbyService: Lobby,
@@ -24,25 +25,21 @@ class MenuViewModel (
 
         fun loadLobbies() {
                 safeViewModelScopeLaunch {
-                       //lobbies = lobbyService.
+                       lobbies = lobbyService.getLobbies()
                 }
         }
 
         fun createLobby() {
-               /* _waitingJob = safeViewModelScopeLaunch {
-                        val userName = userRepository.getUserInfo()!!.nick;
-                        currentLobby =  lobbyPort.
-                        currentLobby = remoteGameService.create(userName)
-                        gameId = remoteGameService.waitForPlayer(currentLobby!!)
-                }*/
+               _waitingJob = safeViewModelScopeLaunch {
+                       //lobbyService.enterAndObserve()
+               }
         }
 
-        fun joinLobby(//lobby
-        ) {
-                /*_waitingJob = safeViewModelScopeLaunch {
-                        currentLobby = lobby
-                        gameId = remoteGameService.join(lobby, userRepository.getUserData()!!.userName)
-                }*/
+        fun joinLobby(lobby: Lobby) {
+                _waitingJob = safeViewModelScopeLaunch {
+                        //currentLobby = lobby.enter()
+                        //gameId = remoteGameService.join(lobby, userRepository.getUserData()!!.userName)
+                }
         }
 
         fun leaveLobby() {

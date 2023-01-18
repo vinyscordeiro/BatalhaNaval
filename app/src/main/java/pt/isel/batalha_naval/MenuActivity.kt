@@ -12,7 +12,8 @@ import pt.isel.batalha_naval.ui.screens.LobbyScreen
 import pt.isel.batalha_naval.viewmodel.MenuViewModel
 
 class MenuActivity : BaseActivity<MenuViewModel>() {
-    override val viewModel: MenuViewModel by viewModels{
+
+    override val viewModel: MenuViewModel by viewModels {
         viewModelInit {
             MenuViewModel(
                 dependencyContainer.lobby,
